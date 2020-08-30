@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "boilerplate-react-native-app",
-    "slug": "boilerplate-react-native-app",
+    "name": "Realty Analysis ",
+    "slug": "realty-analysis-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
