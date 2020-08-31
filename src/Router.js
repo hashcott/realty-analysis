@@ -17,6 +17,14 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+const DashboardStack = () =>  {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Dashboard" component={Dashboard} />
+    </Stack.Navigator>
+  );
+}
+
 const Router = () => {
   return (
     <NavigationContainer>
@@ -39,7 +47,7 @@ const Router = () => {
         }}
       >
         <Tab.Screen name="Map" component={Map} />
-        <Tab.Screen name="Dashboard" component={Dashboard} />
+        <Tab.Screen name="Dashboard" component={DashboardStack} />
         <Tab.Screen name="Report" component={Report} />
       </Tab.Navigator>
     </NavigationContainer>
