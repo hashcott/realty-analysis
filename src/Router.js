@@ -29,6 +29,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
+      initialRouteName="Dashboard"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
 
