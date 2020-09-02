@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 import { Slider, Button } from 'react-native';
 
-export default function App() {
+const Filter = () => {
   return (
     <View>
       <View style={styles.search}>

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Info from '../components/Info';
-export default function App() {
+const Home4 = () => {
   const [dummy, setDummy] = useState([
     { title: '35 Nguyen Trai', price: '2 ty', type: 'Chung cu cao cap'},
     { title: '23 Hoang Quoc Viet', price: '4 ty', type: 'Chung cu cao cap'},
