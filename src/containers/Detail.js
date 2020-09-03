@@ -77,14 +77,14 @@ const styles = StyleSheet.create({
   picture1: {
     width: 330,
     height: 380,
-    backgroundColor: 'coral',
-    marginBottom: '30',
+    backgroundColor: 'burlywood',
+    marginBottom: 30,
   },
   picture2: {
     width: 300,
     height: 350,
-    backgroundColor: 'coral',
-    marginBottom: '30',
+    backgroundColor: 'deepskyblue',
+    marginBottom: 50,
   },
   more: {
     marginLeft: 40,
