@@ -12,17 +12,17 @@ export const Detail = () => {
         <Text style={styles.location}>Location </Text>
       </View>
       <View style={styles.follow}>
-        <Text style={{color: 'white'}}>Follow</Text>
+        <Text style={{color: 'white',paddingTop:5}}>Follow</Text>
       </View>
       <View style={styles.call}>
-        <Text style={{color: 'black'}}>Call</Text>
+        <Text style={{color: 'black', paddingTop:5}}>Call</Text>
       </View>
       <View style={styles.architecture}>
         <View style={styles.picture1}></View>
         <View style={styles.picture2}></View>
       </View>
       <View style={styles.more}>
-        <Text style={{color: 'black'}}>See More</Text>
+        <Text style={{color: 'black', paddingTop:5}}>See More</Text>
       </View>
       </ScrollView>
     </View>
