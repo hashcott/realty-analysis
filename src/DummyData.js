@@ -18,21 +18,25 @@ export const ENTRIES = [
   {
       title: '35 Nguyễn Trãi',
       subtitle: '2 tỷ',
-      illustration: 'https://i.imgur.com/UYiroysl.jpg'
-  },
+      illustration: 'https://i.imgur.com/UYiroysl.jpg',
+      type: 'Chung cu cao cap'
+    },
   {
       title: '23 Hoàng Quốc Việt',
       subtitle: '3 tỷ 9',
-      illustration: 'https://i.imgur.com/UPrs1EWl.jpg'
-  },
+      illustration: 'https://i.imgur.com/UPrs1EWl.jpg',
+      type: 'Chung cu cao cap'
+    },
   {
       title: '29 Lê Văn Lương',
       subtitle: '4 tỷ',
-      illustration: 'https://i.imgur.com/MABUbpDl.jpg'
+      illustration: 'https://i.imgur.com/MABUbpDl.jpg',
+      type: 'Chung cu cao cap'
   },
   {
     title: '46 Nhật Chiêu',
     subtitle: '6 tỷ',
-    illustration: 'https://i.imgur.com/MABUbpDl.jpg'
+    illustration: 'https://i.imgur.com/MABUbpDl.jpg',
+    type: 'Chung cu cao cap'
 },
 ];
