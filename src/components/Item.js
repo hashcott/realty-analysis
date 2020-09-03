@@ -1,12 +1,8 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  TouchableHighlight,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import extraStyle from "../components/SliderEntry/SliderEntry.style";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ItemLocation = ({ item }) => {
   return (
@@ -15,26 +11,32 @@ const ItemLocation = ({ item }) => {
       style={styles.container}
       onPress={() => {
         alert(`You've clicked '${item.title}'`);
-        
       }}
     >
       <View style={{ flexDirection: "row" }}>
-        <View style={{ width: 100, height: 100 }}>
+        <View style={{ width: 120, height: 120 }}>
           <Image source={{ uri: item.illustration }} style={extraStyle.image} />
         </View>
-        <View style={extraStyle.textContainer}>
+        <View style={{ ...extraStyle.textContainer, width: 250 }}>
           <Text style={extraStyle.title} numberOfLines={2}>
             {item.title}
           </Text>
-          <View style={{ marginTop: 6, flexDirection: "row" }}>
+          <View style={extraStyle.subtitleContainer}>
             <FontAwesome name="dollar" size={20} color="red" />
             <Text style={extraStyle.subtitle} numberOfLines={1}>
               {item.subtitle}
             </Text>
           </View>
-          <Text style={extraStyle.subtitle} numberOfLines={1}>
-            {item.type}
-          </Text>
+          <View style={extraStyle.subtitleContainer}>
+            <MaterialCommunityIcons
+              name="home-city-outline"
+              size={24}
+              color="black"
+            />
+            <Text style={extraStyle.subtitle} numberOfLines={1}>
+              {item.type}
+            </Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -43,18 +45,8 @@ const ItemLocation = ({ item }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 400,
-    height: 200,
-    backgroundColor: 'white',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+    marginBottom: 15,
+    width: 600,
   },
 });
 

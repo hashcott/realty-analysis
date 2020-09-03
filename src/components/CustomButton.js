@@ -9,7 +9,7 @@ const CustomButton = (props) => {
       activeOpacity={0.6}
       underlayColor="#DDDDDD"
       onPress={props.HandleClickList}
-      style={styles.list}
+      style={{ ...styles.button, ...props.styling }}
     >
       <View>
         <Feather name={props.icon} size={24} color="black" />
@@ -19,11 +19,9 @@ const CustomButton = (props) => {
 };
 
 const styles = StyleSheet.create({
-  list: {
+  button: {
     position: "absolute",
     backgroundColor: "white",
-    padding: 10,
-    paddingTop: 13,
     bottom: 180,
     right: 20,
     height: 50,
@@ -32,6 +30,15 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+
+    elevation: 7,
   },
 });
 

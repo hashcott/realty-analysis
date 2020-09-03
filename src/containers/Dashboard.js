@@ -43,11 +43,13 @@ const Dashboard = () => {
               },
             }}
           />
-          <FlatList
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
+          <View style={{ height: 100 }}>
+            <FlatList
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -74,12 +76,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 3,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
 
-    elevation: 5,
+    elevation: 7,
   },
   graphTitle: {
     fontSize: 25,
