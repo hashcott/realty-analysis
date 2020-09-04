@@ -3,8 +3,15 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 import { Slider, Button } from 'react-native';
-
+import ReactNativeItemSelect from 'react-native-item-select';
 const Filter = () => {
+  const textStyle = { textAlign: 'center', color: '#696969', fontWeight: 'bold' };
+  const data = [
+    {type:'chung cu'},
+    {type:'nha dat'},
+    {type:'biet thu'},
+    {type:'chung cu cao cap'},
+  ];
   return (
     <View>
       <View style={styles.search}>
@@ -34,14 +41,17 @@ const Filter = () => {
       </View>
       <View style={styles.type}>
         <Text style={{fontSize: 15, fontWeight: 'bold'}}>Type of Real Estate</Text>
-        <View style={styles.priceInput}>
-          <Text style={styles.input2}>Chung cu</Text>
-          <Text style={styles.input2}>Chung cu cao cap</Text>
-        </View>
-        <View style={styles.priceInput}>
-          <Text style={styles.input2}>Nha dat</Text>
-          <Text style={styles.input2}>Biet thu</Text>
-        </View>
+        <ReactNativeItemSelect
+          data={data}
+          itemComponent={
+            item => (
+              <View>
+                  <Text style={{ ...textStyle, fontSize: 14 }}>{item.type}</Text>
+              </View>
+            )
+          }
+          onSubmit={item => navigate('Result')}
+        />
       </View>
       <View style={styles.range}>
       <Text style={{fontSize: 15, fontWeight: 'bold'}}>Area Range</Text>
