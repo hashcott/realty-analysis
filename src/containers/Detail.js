@@ -23,7 +23,12 @@ export const Detail = () => {
       </View>
       <View style={styles.architecture}>
         <Image style={styles.picture1}/>
-        <View style={styles.info2}></View>
+        <View style={styles.info2}>
+          <Text>Mat Bang Can Ho</Text>
+          <Text>So luong tang</Text>
+          <Text>Dien Tich </Text>
+          <Text>Cac phong</Text>
+        </View>
       </View>
       <View>
         <SpinnerButton buttonStyle={styles.buttonCall} >
@@ -70,6 +75,7 @@ const styles = StyleSheet.create({
     height: 350,
     backgroundColor: 'deepskyblue',
     marginBottom: 50,
+    flexDirection:'column'
   },
   buttonFollow: {
     margin:32,
