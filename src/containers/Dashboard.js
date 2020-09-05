@@ -8,6 +8,8 @@ import { VictoryPie } from "victory-native";
 import { graphicData, graphicColor, DATA } from "../DummyData";
 
 const Dashboard = () => {
+  console.disableYellowBox = true;
+
   const renderItem = ({ item }) => {
     return (
       <View style={styles.labels}>
@@ -43,11 +45,15 @@ const Dashboard = () => {
               },
             }}
           />
-          <FlatList
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
+
+          <View style={{ height: 100 }}>
+            <FlatList
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+          
         </View>
       </View>
     </SafeAreaView>
