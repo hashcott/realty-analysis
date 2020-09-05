@@ -5,10 +5,8 @@ import { connect } from "react-redux";
 import {
   VictoryChart,
   VictoryArea,
-  VictoryLine,
   VictoryClipContainer,
-  VictoryAxis,
-  VictoryLabel
+  VictoryLabel,
 } from "victory-native";
 
 const windowWidth = Dimensions.get("window").width;
@@ -18,10 +16,9 @@ const DetailReport = ({ navigation, route }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.container}>
-        <Text style={{ fontSize: 25, fontWeight: "bold", textAlign: 'center', marginTop: 10}}>Xu hướng giá</Text>
-        <Text style={{ fontSize: 18, textAlign: 'center'}}>Tháng 1 - Tháng 6</Text>
+        <Text style={styles.title}>Xu hướng giá</Text>
+        <Text style={styles.subtitle}>Tháng 1 - Tháng 6</Text>
 
-        
         <VictoryChart width={windowWidth - 30}>
           <VictoryArea
             groupComponent={
@@ -40,17 +37,18 @@ const DetailReport = ({ navigation, route }) => {
             x="month"
             y="price"
           />
-          <VictoryLabel x={35} y={25} style={{fontSize: 15}}
-          text={"Tỷ"}
-        />
-        <VictoryLabel x={windowWidth - 78} y={250} style={{fontSize: 15}}
-          text={"Tháng"}
-        />
+          <VictoryLabel x={35} y={25} style={{ fontSize: 15 }} text={"Tỷ"} />
+          <VictoryLabel
+            x={windowWidth - 78}
+            y={250}
+            style={{ fontSize: 15 }}
+            text={"Tháng"}
+          />
         </VictoryChart>
       </View>
-      <View style={{margin: 20}}>
-          <Text style={{fontSize: 24, fontWeight: 'bold'}}>Dự báo</Text>
-          <Text style={{fontSize: 20}}>{route.params.predictText}</Text>
+      <View style={{ margin: 20 }}>
+        <Text style={{ fontSize: 24, fontWeight: "bold" }}>Dự báo</Text>
+        <Text style={{ fontSize: 20 }}>{route.params.predictText}</Text>
       </View>
     </View>
   );
@@ -63,7 +61,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { createExample })(DetailReport);
 
 const styles = StyleSheet.create({
-  container: {  
+  container: {
     marginTop: 20,
     backgroundColor: "white",
     width: windowWidth - 30,
@@ -79,4 +77,11 @@ const styles = StyleSheet.create({
 
     elevation: 7,
   },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 10,
+  },
+  subtitle: { fontSize: 18, textAlign: "center" },
 });

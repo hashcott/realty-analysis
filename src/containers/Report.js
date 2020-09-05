@@ -21,7 +21,7 @@ const Report = ({navigation}) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
-      <Text style={{ margin: 15, fontSize: 18, fontWeight: "500" }}>
+      <Text style={styles.subtitle}>
         Tháng 1 - Tháng 6
       </Text>
       <View style={styles.container}>
@@ -41,4 +41,5 @@ const styles = StyleSheet.create({
   container: {  
     flex: 1,
   },
+  subtitle: { margin: 15, fontSize: 18, fontWeight: "500" },
 });

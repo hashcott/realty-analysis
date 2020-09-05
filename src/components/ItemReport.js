@@ -22,7 +22,7 @@ const ItemReport = ({ item, HandleClick }) => {
         }}
       >
         <MaterialCommunityIcons name="home-city-outline" size={30} color={item.color} style={{marginLeft: 20}} />
-        <Text style={{ fontSize: 26, fontWeight: "bold", marginLeft: 10 }}>
+        <Text style={styles.title}>
           {item.x}
         </Text>
         {item.predict === "decrease" && 
@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
 
     elevation: 7,
   },
+  title: { fontSize: 26, fontWeight: "bold", marginLeft: 10 },
+  
 });
 
 export default ItemReport;
