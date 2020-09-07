@@ -1,6 +1,5 @@
-import * as React from "react";
-import { View, ScrollView, StatusBar, SafeAreaView } from "react-native";
-
+import React, { useState, useRef } from "react";
+import { View, ScrollView } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { ENTRIES } from "../../DummyData";
 import SliderEntry from "../SliderEntry/SliderEntry";
@@ -9,50 +8,43 @@ import styles, { colors } from "./index.style";
 
 const SLIDER_1_FIRST_ITEM = 0;
 
-export default class CarouselPlace extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
-    };
-  }
+const CarouselPlace = (props) => {
+  const carouselRef = useRef(null);
 
-  _renderItemWithParallax({ item, index }, parallaxProps) {
+  const [slider1ActiveSlide, setslider1ActiveSlide] = useState(
+    SLIDER_1_FIRST_ITEM
+  );
+
+  const renderItemWithParallax = ({ item, index }, parallaxProps) => {
     return (
       <SliderEntry
         data={item}
         even={(index + 1) % 2 === 0}
         parallax={true}
         parallaxProps={parallaxProps}
+        HandleClick={props.HandleClick}
       />
     );
-  }
+  };
 
-  mainExample(number, title) {
-    const { slider1ActiveSlide } = this.state;
-
+  const mainExample = () => {
     return (
       <View style={styles.exampleContainer}>
-        
         <Carousel
-          ref={(c) => (this._slider1Ref = c)}
+          ref={carouselRef}
           data={ENTRIES}
-          renderItem={this._renderItemWithParallax}
+          renderItem={renderItemWithParallax}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
           hasParallaxImages={true}
           firstItem={SLIDER_1_FIRST_ITEM}
           inactiveSlideScale={0.94}
           inactiveSlideOpacity={0.7}
-          // inactiveSlideShift={20}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
           loop={true}
           loopClonesPerSide={2}
-          // autoplay={true}
-          // autoplayDelay={500}
-          // autoplayInterval={3000}
-          onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index })}
+          onSnapToItem={(index) => setslider1ActiveSlide(index)}
         />
         <Pagination
           dotsLength={ENTRIES.length}
@@ -63,28 +55,24 @@ export default class CarouselPlace extends React.Component {
           inactiveDotColor={colors.black}
           inactiveDotOpacity={0.4}
           inactiveDotScale={0.6}
-          carouselRef={this._slider1Ref}
-          tappableDots={!!this._slider1Ref}
+          carouselRef={carouselRef}
+          tappableDots={!!carouselRef}
         />
       </View>
     );
-  }
-  render() {
-    const example1 = this.mainExample(
-      1,
-      "Default layout | Loop | Autoplay | Parallax | Scale | Opacity | Pagination with tappable dots"
-    );
+  };
 
-    return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.scrollview}
-          scrollEventThrottle={200}
-          directionalLockEnabled={true}
-        >
-          {example1}
-        </ScrollView>
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.scrollview}
+        scrollEventThrottle={200}
+        directionalLockEnabled={true}
+      >
+        {mainExample()}
+      </ScrollView>
+    </View>
+  );
+};
+
+export default CarouselPlace;

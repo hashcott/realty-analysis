@@ -4,14 +4,12 @@ import extraStyle from "../components/SliderEntry/SliderEntry.style";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const ItemLocation = ({ item }) => {
+const ItemLocation = ({ item, HandleClick }) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
       style={styles.container}
-      onPress={() => {
-        alert(`You've clicked '${item.title}'`);
-      }}
+      onPress={() => HandleClick(item)}
     >
       <View style={{ flexDirection: "row" }}>
         <View style={{ width: 120, height: 120 }}>

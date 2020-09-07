@@ -60,9 +60,7 @@ export default class SliderEntry extends Component {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.slideInnerContainer}
-        onPress={() => {
-          alert(`You've clicked '${title}'`);
-        }}
+        onPress={() => this.props.HandleClick(this.props.data)}
       >
         <View style={{ flexDirection: "row" }}>
           <View style={{ width: 100, height: 100 }}>{this.image}</View>

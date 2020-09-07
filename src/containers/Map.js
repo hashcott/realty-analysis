@@ -10,13 +10,19 @@ import ItemLocation from "../components/Item";
 import { ENTRIES } from "../DummyData";
 
 const Map = ({ navigation }) => {
-  const [displayList, setDisplayList] = useState(true);
+  const [displayList, setDisplayList] = useState(false);
+
+  const HandleClickItem = (item) => {
+    navigation.navigate("Detail", item);
+  };
 
   const HandleClickList = () => {
     setDisplayList(!displayList);
   };
 
-  const renderItem = ({ item }) => <ItemLocation item={item} />;
+  const renderItem = ({ item }) => (
+    <ItemLocation item={item} HandleClick={HandleClickItem} />
+  );
 
   return (
     <SafeAreaView style={{ flex: 1, top: 20, backgroundColor: "white" }}>
@@ -35,7 +41,8 @@ const Map = ({ navigation }) => {
             />
           </View>
 
-          <Carousel />
+          <Carousel HandleClick={HandleClickItem} />
+
           <CustomButton HandleClickList={HandleClickList} icon="list" />
         </View>
       )}

@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/slider": "^3.0.3",
     "@react-navigation/bottom-tabs": "^5.7.2",
@@ -22,15 +23,14 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-charts-wrapper": "^0.5.7",
     "react-native-gesture-handler": "~1.6.0",
-    "react-native-item-select": "^0.3.0",
     "react-native-google-places-autocomplete": "^1.8.0",
-
+    "react-native-item-select": "^0.3.0",
     "react-native-maps": "0.27.1",
     "react-native-reanimated": "~1.9.0",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
-    "react-native-spinner-button": "^1.0.3",
     "react-native-snap-carousel": "^4.0.0-beta.6",
+    "react-native-spinner-button": "^1.0.3",
     "react-native-svg": "^12.1.0",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
