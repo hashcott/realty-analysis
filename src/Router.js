@@ -9,6 +9,8 @@ import Dashboard from "./containers/Dashboard";
 import Map from "./containers/Map";
 import Report from "./containers/Report";
 import Filter from "./containers/Filter";
+import DetailReport from "./containers/DetailReport";
+
 
 // icon
 import { Feather } from '@expo/vector-icons';
@@ -17,6 +19,8 @@ import { AntDesign } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 const DashboardStack = createStackNavigator();
 const MapStack = createStackNavigator();
+const ReportStack = createStackNavigator();
+
 const Drawer = createDrawerNavigator();
 
 const DashboardStackScreen = () =>  {
@@ -33,6 +37,15 @@ const MapStackScreen = () =>  {
       <MapStack.Screen options={{headerShown: false}} name="Map" component={Map} />
       <MapStack.Screen name="Filter" component={Filter} />
     </MapStack.Navigator> 
+  );
+}
+
+const ReportStackScreen = () =>  {
+  return (
+    <ReportStack.Navigator>
+      <ReportStack.Screen name="Predict Report" component={Report} />
+      <ReportStack.Screen name="DetailReport" component={DetailReport} />
+    </ReportStack.Navigator> 
   );
 }
 
@@ -60,7 +73,7 @@ const Router = () => {
       >
         <Tab.Screen name="Map" component={MapStackScreen} />
         <Tab.Screen name="Dashboard" component={DashboardStackScreen} />
-        <Tab.Screen name="Report" component={Report} />
+        <Tab.Screen name="Report" component={ReportStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
