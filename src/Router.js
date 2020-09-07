@@ -11,6 +11,7 @@ import Report from "./containers/Report";
 import Filter from "./containers/Filter";
 import DetailReport from "./containers/DetailReport";
 
+
 // icon
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -22,11 +23,20 @@ const ReportStack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
-const DashboardStack = () =>  {
+const DashboardStackScreen = () =>  {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-    </Stack.Navigator>
+    <DashboardStack.Navigator>
+      <DashboardStack.Screen name="Dashboard" component={Dashboard} />
+    </DashboardStack.Navigator>
+  );
+}
+
+const MapStackScreen = () =>  {
+  return (
+    <MapStack.Navigator>
+      <MapStack.Screen options={{headerShown: false}} name="Map" component={Map} />
+      <MapStack.Screen name="Filter" component={Filter} />
+    </MapStack.Navigator> 
   );
 }
 

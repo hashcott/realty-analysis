@@ -1,70 +1,66 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  TouchableHighlight,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
 import MapView from "react-native-maps";
 import SearchBar from "../components/SearchBar";
-import { Feather } from "@expo/vector-icons";
-import Carousel from '../components/Carousel/Carousel';
+import Carousel from "../components/Carousel/Carousel";
+import CustomButton from "../components/CustomButton";
+import ItemLocation from "../components/Item";
+import { ENTRIES } from "../DummyData";
 
+const Map = ({ navigation }) => {
+  const [displayList, setDisplayList] = useState(true);
 
-const Map = () => {
-  const _renderItem = ({ item, index }) => {
-    return (
-      <View style={styles.slide}>
-        <Text style={styles.title}>{item.title}</Text>
-      </View>
-    );
+  const HandleClickList = () => {
+    setDisplayList(!displayList);
   };
 
+  const renderItem = ({ item }) => <ItemLocation item={item} />;
+
   return (
-    <SafeAreaView style={{ flex: 1, top: 20 }}>
-      <View style={styles.edges}>
+    <SafeAreaView style={{ flex: 1, top: 20, backgroundColor: "white" }}>
+      {!displayList && (
         <View style={styles.edges}>
-          <MapView
-            style={styles.map}
-            provider="google"
-            region={{
-              latitude: 21.0227253,
-              longitude: 105.7669231,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          />
+          <View style={styles.edges}>
+            <MapView
+              style={styles.map}
+              provider="google"
+              region={{
+                latitude: 21.0227253,
+                longitude: 105.7669231,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+          </View>
+
+          <Carousel />
+          <CustomButton HandleClickList={HandleClickList} icon="list" />
         </View>
+      )}
 
-        <SearchBar />
+      {displayList && (
+        <View style={styles.listContainer}>
+          <FlatList data={ENTRIES} renderItem={renderItem} />
+        </View>
+      )}
 
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => {}}
-          style={styles.filter}
-        >
-          <View>
-            <Feather name="filter" size={24} color="black" />
-          </View>
-        </TouchableHighlight>
+      {displayList && (
+        <CustomButton
+          styling={styles.navigation}
+          HandleClickList={HandleClickList}
+          icon="navigation"
+        />
+      )}
 
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => {}}
-          style={styles.list}
-        >
-          <View>
-            <Feather name="list" size={24} color="black" />
-          </View>
-        </TouchableHighlight>
+      <SearchBar />
 
-        <Carousel />
-      </View>
+      <CustomButton
+        styling={styles.filter}
+        HandleClickList={() => navigation.navigate("Filter")}
+        icon="filter"
+      />
     </SafeAreaView>
   );
 };
@@ -83,31 +79,23 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
   },
-  list: {
-    position: "absolute",
-    backgroundColor: "white",
-    padding: 10,
-    paddingTop: 13,
-    bottom: 180,
-    right: 20,
-    height: 50,
-    zIndex: 1,
-    width: 50,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   filter: {
-    position: "absolute",
-    backgroundColor: "white",
-    padding: 10,
-    paddingTop: 13,
     top: 20,
     right: 20,
-    height: 50,
-    zIndex: 1,
+    borderRadius: 0,
+  },
+  navigation: {
+    bottom: 30,
+    right: 20,
   },
   map: {
     flex: 1,
+  },
+  listContainer: {
+    flex: 1,
+    position: "absolute",
+    left: 20,
+    top: 90,
+    height: 470,
   },
 });
