@@ -8,20 +8,44 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Dashboard from "./containers/Dashboard";
 import Map from "./containers/Map";
 import Report from "./containers/Report";
+import Filter from "./containers/Filter";
+import DetailReport from "./containers/DetailReport";
+
 
 // icon
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const DashboardStack = createStackNavigator();
+const MapStack = createStackNavigator();
+const ReportStack = createStackNavigator();
+
 const Drawer = createDrawerNavigator();
 
-const DashboardStack = () =>  {
+const DashboardStackScreen = () =>  {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-    </Stack.Navigator>
+    <DashboardStack.Navigator>
+      <DashboardStack.Screen name="Dashboard" component={Dashboard} />
+    </DashboardStack.Navigator>
+  );
+}
+
+const MapStackScreen = () =>  {
+  return (
+    <MapStack.Navigator>
+      <MapStack.Screen options={{headerShown: false}} name="Map" component={Map} />
+      <MapStack.Screen name="Filter" component={Filter} />
+    </MapStack.Navigator> 
+  );
+}
+
+const ReportStackScreen = () =>  {
+  return (
+    <ReportStack.Navigator>
+      <ReportStack.Screen name="Predict Report" component={Report} />
+      <ReportStack.Screen name="DetailReport" component={DetailReport} />
+    </ReportStack.Navigator> 
   );
 }
 
@@ -29,6 +53,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
+      initialRouteName="Dashboard"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
 
@@ -46,9 +71,9 @@ const Router = () => {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Map" component={Map} />
-        <Tab.Screen name="Dashboard" component={DashboardStack} />
-        <Tab.Screen name="Report" component={Report} />
+        <Tab.Screen name="Map" component={MapStackScreen} />
+        <Tab.Screen name="Dashboard" component={DashboardStackScreen} />
+        <Tab.Screen name="Report" component={ReportStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
