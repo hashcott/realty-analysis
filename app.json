@@ -16,11 +16,13 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "com.expofirebaseauth",
       "config": {
         "googleMapsApiKey": "AIzaSyAUFM0lGzma5_s4-rvMdg9GzzmgbJ2vhDA"
       }
     },
     "android": {
+      "package": "com.expofirebaseauth",
       "config": {
          "googleMaps": { "apiKey": "AIzaSyAUFM0lGzma5_s4-rvMdg9GzzmgbJ2vhDA" }   
       }

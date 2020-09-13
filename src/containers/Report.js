@@ -40,6 +40,7 @@ export default connect(mapStateToProps, { createExample })(Report);
 const styles = StyleSheet.create({
   container: {  
     flex: 1,
+    backgroundColor : "#e8e8e8"
   },
-  subtitle: { margin: 15, fontSize: 18, fontWeight: "500" },
+  subtitle: { marginVertical: 8 , fontSize: 18, fontWeight: "bold", textAlign: "center" },
 });

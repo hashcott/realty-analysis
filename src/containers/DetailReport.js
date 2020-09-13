@@ -14,7 +14,7 @@ const windowWidth = Dimensions.get("window").width;
 const DetailReport = ({ navigation, route }) => {
   navigation.setOptions({ title: route.params.type });
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: "#e8e8e8" }}>
       <View style={styles.container}>
         <Text style={styles.title}>Xu hướng giá</Text>
         <Text style={styles.subtitle}>Tháng 1 - Tháng 6</Text>
@@ -66,16 +66,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: windowWidth - 30,
     alignSelf: "center",
-    borderRadius: 30,
-    shadowColor: "#000",
+    borderRadius: 8,
+    shadowColor: "#e8e8e8",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
 
-    elevation: 7,
+    elevation: 4,
   },
   title: {
     fontSize: 25,
