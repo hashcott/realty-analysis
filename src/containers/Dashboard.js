@@ -68,7 +68,7 @@ export default connect(mapStateToProps, { createExample })(Dashboard);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "#e8e8e8",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -76,16 +76,16 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     padding: 30,
-    borderRadius: 20,
-    shadowColor: "#000",
+    borderRadius: 8,
+    shadowColor: "#e8e8e8",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
 
-    elevation: 7,
+    elevation: 4,
   },
   graphTitle: {
     fontSize: 25,

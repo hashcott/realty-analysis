@@ -64,20 +64,20 @@ const styles = StyleSheet.create({
   itemContainer: {
     alignSelf: 'center',
     backgroundColor: "white",
-    borderRadius: 30,
+    borderRadius: 8,
     width: windowWidth - 30,
     height: 200,
     marginTop: 10,
     marginBottom: 10,   
-    shadowColor: "#000",
+    shadowColor: "#e8e8e8",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
 
-    elevation: 7,
+    elevation: 4,
   },
   title: { fontSize: 26, fontWeight: "bold", marginLeft: 10 },
   
