@@ -21,7 +21,7 @@ const LogIn = (props) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => props.navigation.navigate("Main"))
+      .then(() => props.navigation.navigate("Dashboard"))
       .catch((error) => setErrorMessage(error.message));
   };
   return (
@@ -29,7 +29,7 @@ const LogIn = (props) => {
       <View style={styles.header}>
         <Octicons name="home" size={45} color="deepskyblue" />
         <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-          LOGIN
+          SIGN IN
         </Text>
       </View>
       {errorMessage && (
@@ -39,7 +39,7 @@ const LogIn = (props) => {
         <Fontisto name="email" size={24} color="black" />
         <TextInput
           placeholder="Your Email"
-          style={{ marginLeft: 20, marginRight: 160 }}
+          style={{ marginLeft: 20, marginRight: 40 }}
           autoCapitalize="none"
           onChangeText={setEmail}
           placeholderTextColor={"darkgray"}
@@ -50,7 +50,7 @@ const LogIn = (props) => {
         <Feather name="unlock" size={24} color="black" /> 
         <TextInput
           placeholder="Your password"
-          style={{ marginLeft: -10, marginRight: 160 }}
+          style={{ marginLeft: 20, marginRight: 40 }}
           autoCapitalize="none"
           onChangeText={setPassword}
           placeholderTextColor={"darkgray"}
@@ -85,18 +85,18 @@ const LogIn = (props) => {
           </Text>
         </SpinnerButton>
       </View> */}
-      <SpinnerButton buttonStyle={styles.buttonBottom}>
+      {/* <SpinnerButton buttonStyle={styles.buttonBottom}>
         <Text
           style={{ color: "deepskyblue", fontWeight: "bold", fontSize: 16 }}
         >
           Forgot password?
         </Text>
-      </SpinnerButton>
+      </SpinnerButton> */}
       <SpinnerButton onPress={() =>  props.navigation.navigate("Signup")} buttonStyle={styles.buttonBottom}>
-        <Text style={{ color: "#bbb", fontWeight: "bold" }}>
+        <Text style={{ color: "#bbb", fontWeight: "bold", fontSize: 16}}>
           Don't have a account?{" "}
         </Text>
-        <Text style={{ color: "deepskyblue", fontWeight: "bold" }}>
+        <Text style={{ color: "deepskyblue", fontWeight: "bold", fontSize: 16}}>
           Register
         </Text>
       </SpinnerButton>
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     paddingTop: 120,
+    backgroundColor: 'white',
   },
   header: {
     alignItems: "center",
@@ -119,8 +120,8 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: "row",
     backgroundColor:"#e8e8e8",
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "fl",
+    // alignItems: "center",
     width: "100%",
     borderColor: "#bbb",
     borderRadius: 10,
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
-    height: 65,
+    height: 50,
     width: 380,
     backgroundColor: "deepskyblue",
     borderRadius: 10,
@@ -160,5 +161,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
   },
-});
+}); 
 export default LogIn;
