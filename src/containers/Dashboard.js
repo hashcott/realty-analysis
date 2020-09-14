@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
-
 import { VictoryPie } from "victory-native";
 
 import { graphicData, graphicColor, DATA } from "../DummyData";
@@ -53,7 +52,6 @@ const Dashboard = () => {
               keyExtractor={(item) => item.id}
             />
           </View>
-
         </View>
       </View>
     </SafeAreaView>

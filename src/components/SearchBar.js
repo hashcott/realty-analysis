@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, View } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { Feather } from "@expo/vector-icons";
@@ -16,8 +16,22 @@ const SearchBar = () => {
         placeholder="Tìm địa điểm"
         minLength={2}
         autoFocus={false}
-        returnKeyType={"default"}
+        returnKeyType={"default"} 
+        listViewDisplayed={true}   
         fetchDetails={true}
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log('-----------------------------------');
+          console.log(details);
+        }}
+        query={{
+          // available options: https://developers.google.com/places/web-service/autocomplete
+          key: 'AIzaSyAhuvkbu8iQU3vptKQSbaHQNlTJv0ndTVw',
+          language: 'vn', // language of the results
+          // types: '(cities)', // default: 'geocode'
+        }}
+        currentLocation={true}
+        currentLocationLabel='Current location'
         styles={{
           textInputContainer: {
             backgroundColor: "rgba(0,0,0,0)",
@@ -47,8 +61,7 @@ const styles = StyleSheet.create({
     left: 20,
     top: 20,
     right: 80,
-    height: 50,
-    zIndex: 1,
+    zIndex: 1,  
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {

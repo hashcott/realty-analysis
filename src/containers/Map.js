@@ -7,10 +7,13 @@ import SearchBar from "../components/SearchBar";
 import Carousel from "../components/Carousel/Carousel";
 import CustomButton from "../components/CustomButton";
 import ItemLocation from "../components/Item";
-import { ENTRIES } from "../DummyData";
+import { test } from "../DummyData";
 
 const Map = ({ navigation }) => {
   const [displayList, setDisplayList] = useState(false);
+  
+  console.log(test);
+
 
   const HandleClickItem = (item) => {
     navigation.navigate("Detail", item);
@@ -49,7 +52,7 @@ const Map = ({ navigation }) => {
 
       {displayList && (
         <View style={styles.listContainer}>
-          <FlatList data={ENTRIES} renderItem={renderItem} />
+          <FlatList data={test} renderItem={renderItem} />
         </View>
       )}
 
@@ -71,12 +74,6 @@ const Map = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-const mapStateToProps = (state) => {
-  return { ...state.example };
-};
-
-export default connect(mapStateToProps, { createExample })(Map);
 
 const styles = StyleSheet.create({
   edges: {
@@ -106,3 +103,11 @@ const styles = StyleSheet.create({
     height: 470,
   },
 });
+
+const mapStateToProps = (state) => {
+  return { ...state.example };
+};
+
+export default connect(mapStateToProps, { createExample })(Map);
+
+

@@ -17,7 +17,7 @@ const SignUp = (props) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => props.navigation.navigate("Dashboard"))
+      .then(() => props.navigation.navigate("Loading"))
       .catch((error) => setErrorMessage(error.message));
   };
   return (

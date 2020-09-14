@@ -1,3 +1,7 @@
+import {dataTest} from './containers/Loading';
+
+export const test = dataTest;
+
 export const graphicData = [
   { y: 30, label: "30%" },
   { y: 40, label: "40%" },

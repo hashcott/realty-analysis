@@ -14,6 +14,7 @@ import Detail from "./containers/Detail";
 
 import Login from "./containers/LogIn";
 import Signup from "./containers/SignUp";
+import Loading from "./containers/Loading";
 
 // icon
 import { Feather } from "@expo/vector-icons";
@@ -35,6 +36,7 @@ const Stack = createStackNavigator();
 const DashboardStackScreen = () => {
   return (
     <DashboardStack.Navigator>
+      <DashboardStack.Screen name="Loading" component={Loading} />
       <DashboardStack.Screen
         name="Dashboard"
         component={Dashboard}
@@ -107,6 +109,7 @@ const Authen = () => {
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Loading" component={Loading} />
       <Stack.Screen name="Dashboard" component={DashboardStackScreen} />
     </Stack.Navigator>
   );

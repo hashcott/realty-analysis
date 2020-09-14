@@ -13,16 +13,16 @@ const ItemLocation = ({ item, HandleClick }) => {
     >
       <View style={{ flexDirection: "row" }}>
         <View style={{ width: 120, height: 120 }}>
-          <Image source={{ uri: item.illustration }} style={extraStyle.image} />
+          {/* <Image source={{ uri: item.illustration }} style={extraStyle.image} /> */}
         </View>
         <View style={{ ...extraStyle.textContainer, width: 250 }}>
           <Text style={extraStyle.title} numberOfLines={2}>
-            {item.title}
+            {item.diaChi}
           </Text>
           <View style={extraStyle.subtitleContainer}>
             <FontAwesome name="dollar" size={20} color="red" />
             <Text style={extraStyle.subtitle} numberOfLines={1}>
-              {item.subtitle}
+              {item.giaCa} tỷ
             </Text>
           </View>
           <View style={extraStyle.subtitleContainer}>
@@ -32,7 +32,7 @@ const ItemLocation = ({ item, HandleClick }) => {
               color="black"
             />
             <Text style={extraStyle.subtitle} numberOfLines={1}>
-              {item.type}
+              {item.loai}
             </Text>
           </View>
         </View>
