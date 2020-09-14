@@ -41,16 +41,16 @@ export default class SliderEntry extends Component {
 
   render() {
     const {
-      data: { title, subtitle },
+      data: { diaChi, giaCa },
       even,
     } = this.props;
 
-    const uppercaseTitle = title ? (
+    const uppercaseTitle = diaChi ? (
       <Text
         style={[styles.title, even ? styles.titleEven : {}]}
         numberOfLines={2}
       >
-        {title.toUpperCase()}
+        {diaChi.toUpperCase()}
       </Text>
     ) : (
       false
@@ -63,7 +63,7 @@ export default class SliderEntry extends Component {
         onPress={() => this.props.HandleClick(this.props.data)}
       >
         <View style={{ flexDirection: "row" }}>
-          <View style={{ width: 100, height: 100 }}>{this.image}</View>
+          {/* <View style={{ width: 100, height: 100 }}>{this.image}</View> */}
           <View
             style={[styles.textContainer, even ? styles.textContainerEven : {}]}
           >
@@ -74,7 +74,7 @@ export default class SliderEntry extends Component {
                 style={[styles.subtitle, even ? styles.subtitleEven : {}]}
                 numberOfLines={1}
               >
-                {subtitle}
+                {giaCa}
               </Text>
             </View>
           </View>
