@@ -1,4 +1,4 @@
-import {dataTest} from './containers/Loading';
+import { dataTest } from "./containers/Loading";
 
 export const test = dataTest;
 
@@ -9,7 +9,14 @@ export const graphicData = [
   { y: 20, label: "20%" },
 ];
 
-export const graphicColor = ["red", "blue", "yellow", "green", "tomato"];
+export const graphicColor = [
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "tomato",
+  "gray",
+];
 
 export const DATA = [
   {
@@ -25,7 +32,8 @@ export const DATA = [
       { month: 6, price: 4.0 },
     ],
     predict: "decrease",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
   {
     id: 2,
@@ -40,7 +48,8 @@ export const DATA = [
       { month: 6, price: 5.0 },
     ],
     predict: "decrease",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
   {
     id: 3,
@@ -55,7 +64,8 @@ export const DATA = [
       { month: 6, price: 4.0 },
     ],
     predict: "increase",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
   {
     id: 4,
@@ -70,7 +80,8 @@ export const DATA = [
       { month: 6, price: 8.0 },
     ],
     predict: "increase",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
 ];
 

@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
 import { VictoryPie } from "victory-native";
 
-import { graphicData, graphicColor, DATA } from "../DummyData";
+import { graphicColor } from "../DummyData";
+import { set } from "react-native-reanimated";
 
 const Dashboard = () => {
   console.disableYellowBox = true;
+  const [graphicData, setGraphicData] = useState([]);
+  const [dataWithColor, setDataWithColor] = useState([]);
+
+  const getData = async () => {
+    fetch("https://dreamkatchr.herokuapp.com/getPercentEachType")
+      .then((response) => response.json())
+      .then((data) => {
+        let graphic = [];
+        let i = 0;
+        let dataColor = [];
+        console.log(data);
+        Object.keys(data).forEach((keys) => {
+          graphic.push({
+            y: Math.round(parseFloat(data[keys].ti_le) * 3.5),
+            label: Math.round(parseFloat(data[keys].ti_le)) + "%",
+          });
+          dataColor.push({ x: data[keys][""], color: graphicColor[i] });
+          i++;
+        });
+        setGraphicData(graphic);
+        setDataWithColor(dataColor);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  console.log(graphicData.length);
+  if (graphicData.length == 0) {
+    getData();
+  }
 
   const renderItem = ({ item }) => {
     return (
@@ -27,31 +58,29 @@ const Dashboard = () => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <View style={styles.card}>
-          <Text style={styles.graphTitle}>Loại hình bất động sản</Text>
-          <VictoryPie
-            data={graphicData}
-            colorScale={graphicColor}
-            width={250}
-            height={250}
-            innerRadius={50}
-            style={{
-              labels: {
-                fill: "black",
-                fontSize: 15,
-                padding: 7,
-              },
-            }}
-          />
+      <View style={styles.card}>
+        <Text style={styles.graphTitle}>Loại hình bất động sản</Text>
+        <VictoryPie
+          data={graphicData}
+          colorScale={graphicColor}
+          width={250}
+          height={250}
+          innerRadius={50}
+          style={{
+            labels: {
+              fill: "black",
+              fontSize: 15,
+              padding: 16,
+            },
+          }}
+        />
 
-          <View style={{ height: 100 }}>
-            <FlatList
-              data={DATA}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.id}
-            />
-          </View>
+        <View style={{ height: 150 }}>
+          <FlatList
+            data={dataWithColor}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
         </View>
       </View>
     </SafeAreaView>
