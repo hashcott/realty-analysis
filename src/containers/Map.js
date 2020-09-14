@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
-import { createExample } from "../actions/Example";
+import { getAll } from "../actions";
 import { connect } from "react-redux";
 import MapView from "react-native-maps";
 import SearchBar from "../components/SearchBar";
 import Carousel from "../components/Carousel/Carousel";
 import CustomButton from "../components/CustomButton";
 import ItemLocation from "../components/Item";
+import * as Location from "expo-location";
 import { test } from "../DummyData";
 
-const Map = ({ navigation }) => {
+const Map = ({ navigation, data, loading, error }) => {
   const [displayList, setDisplayList] = useState(false);
-  
-  console.log(test);
+  const [location, setLocation] = useState({});
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+      }
 
-
+      let location = await Location.getCurrentPositionAsync({});
+      let { latitude, longitude } = location.coords;
+      setLocation({ latitude, longitude });
+    })();
+  }, []);
   const HandleClickItem = (item) => {
     navigation.navigate("Detail", item);
   };
@@ -36,8 +46,7 @@ const Map = ({ navigation }) => {
               style={styles.map}
               provider="google"
               region={{
-                latitude: 21.0227253,
-                longitude: 105.7669231,
+                ...location,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
@@ -52,7 +61,7 @@ const Map = ({ navigation }) => {
 
       {displayList && (
         <View style={styles.listContainer}>
-          <FlatList data={test} renderItem={renderItem} />
+          <FlatList data={data} renderItem={renderItem} />
         </View>
       )}
 
@@ -105,9 +114,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  return { ...state.example };
+  return { ...state.all };
 };
 
-export default connect(mapStateToProps, { createExample })(Map);
-
-
+export default connect(mapStateToProps, { getAll })(Map);

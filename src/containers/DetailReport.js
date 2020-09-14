@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import { createExample } from "../actions/Example";
+import {} from "../actions";
 import { connect } from "react-redux";
 import {
   VictoryChart,
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => {
   return { ...state.example };
 };
 
-export default connect(mapStateToProps, { createExample })(DetailReport);
+export default connect(mapStateToProps, {})(DetailReport);
 
 const styles = StyleSheet.create({
   container: {

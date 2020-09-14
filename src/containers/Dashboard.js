@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native";
-import { createExample } from "../actions/Example";
+import {} from "../actions";
 import { connect } from "react-redux";
 import { VictoryPie } from "victory-native";
 
@@ -62,7 +62,7 @@ const mapStateToProps = (state) => {
   return { ...state.example };
 };
 
-export default connect(mapStateToProps, { createExample })(Dashboard);
+export default connect(mapStateToProps, {})(Dashboard);
 
 const styles = StyleSheet.create({
   container: {

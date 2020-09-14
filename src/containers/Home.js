@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { createExample } from "../actions/Example";
+import {} from "../actions";
 import { connect } from "react-redux";
 
 const Home = () => {
@@ -15,6 +15,6 @@ const mapStateToProps = (state) => {
   return { ...state.example };
 };
 
-export default connect(mapStateToProps, { createExample })(Home);
+export default connect(mapStateToProps, {})(Home);
 
 const styles = StyleSheet.create({});
