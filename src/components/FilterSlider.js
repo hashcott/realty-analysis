@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Dimensions } from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 
 const FilterSlider = (props) => {
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(100);
+  props.change(minVal, maxVal);
+
   return (
     <View style={styles.range}>
       <Text style={{ fontSize: 15, fontWeight: "bold" }}>{props.title}</Text>
       <View style={styles.priceInput}>
         <TextInput
           style={styles.input}
-          placeholder={props.placeholder}
+          placeholder={minVal + props.placeholder}
+          placeholderTextColor='black'
         ></TextInput>
         <TextInput
           style={styles.input}
-          placeholder={props.placeholder}
+          placeholder={maxVal + props.placeholder}
+          placeholderTextColor='black'
         ></TextInput>
       </View>
       <MultiSlider
@@ -22,7 +28,9 @@ const FilterSlider = (props) => {
         values={[props.min, props.max]}
         sliderLength={Dimensions.get("window").width - 40}
         onValuesChangeFinish={(values) => {
-          console.log(values);
+          setMinVal(values[0]);
+          setMaxVal(values[1]);
+          props.change(minVal, maxVal);
         }}
         min={props.min}
         max={props.max}

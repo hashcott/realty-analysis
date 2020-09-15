@@ -1,56 +1,99 @@
-import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
 import ReactNativeItemSelect from "react-native-item-select";
 import FilterSlider from "../components/FilterSlider";
 
-const Filter = () => {
+const Filter = ({ navigation, route }) => {
+  const [dataType, setDataType] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [minArea, setMinArea] = useState(0);
+  const [maxArea, setMaxArea] = useState(0);
+  const [type, setType] = useState("Căn hộ Cao cấp")
+
   const textStyle = {
     textAlign: "center",
     color: "#696969",
     fontWeight: "bold",
   };
-  const data = [
-    { type: "chung cu" },
-    { type: "nha dat" },
-    { type: "biet thu" },
-    { type: "chung cu cao cap" },
-  ];
+
+  const getData = async () => {
+    fetch("https://dreamkatchr.herokuapp.com/getPercentEachType")
+      .then((response) => response.json())
+      .then((data) => {
+        let dataTemp = [];
+        Object.keys(data).forEach((keys) => {
+          dataTemp.push({ type: data[keys][""] });
+        });
+        dataTemp.pop();
+        setDataType(dataTemp);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  if (dataType.length == 0) {
+    getData();
+  }
+
+  const changePrice = (min, max) => {
+    setMinPrice(min);
+    setMaxPrice(max);
+  };
+
+  const changeArea = (min, max) => {
+    setMinArea(min);
+    setMaxArea(max);
+  };
+
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <FilterSlider
         title={"Price Range"}
-        placeholder={"$0.00"}
+        placeholder={" tỷ"}
         min={0}
-        max={10}
-        step={0.5}
+        max={100}
+        step={1}
+        change={changePrice}
       />
 
       <View style={styles.type}>
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>
           Type of Real Estate
         </Text>
-        <ReactNativeItemSelect
-          data={data}
-          itemComponent={(item) => (
-            <View>
-              <Text style={{ ...textStyle, fontSize: 14 }}>{item.type}</Text>
-            </View>
-          )}
-          onSubmit={(item) => navigate("Result")}
-        />
+        {dataType.length != 0 && (
+          <ReactNativeItemSelect
+            data={dataType}
+            itemComponent={(item) => (
+              <View>
+                <Text style={{ ...textStyle, fontSize: 14 }}>{item.type}</Text>
+              </View>
+            )}
+            onSubmit={(item) => setType(item.type)}
+          />
+        )}
       </View>
 
       <FilterSlider
         title={"Area Range"}
-        placeholder={"0 m"}
+        placeholder={" m"}
         min={0}
         max={400}
         step={50}
+        change={changeArea}
       />
 
-      <View style={styles.button}>
+      <Button
+        // onPress={() => navigation.navigate("Map", { minPrice, maxPrice, minArea, maxArea, type})}
+        onPress={() =>  { route.params.handleFilter(minPrice, maxPrice, minArea, maxArea, type); 
+          navigation.navigate("Map")}}
+        title="Apply"
+        color="black"
+      />
+      {/* <View style={styles.button}>
         <Text style={{ color: "white" }}>Apply</Text>
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

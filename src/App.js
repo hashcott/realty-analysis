@@ -7,6 +7,7 @@ import Router from "./Router";
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 export default function App() {
+  
   return (
     <Provider store={store}>
       <Router />

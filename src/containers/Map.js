@@ -9,7 +9,7 @@ import CustomButton from "../components/CustomButton";
 import ItemLocation from "../components/Item";
 import * as Location from "expo-location";
 
-const Map = ({ navigation }) => {
+const Map = ({ navigation, route}) => {
   const [displayList, setDisplayList] = useState(false);
   const [location, setLocation] = useState({});
   const [listData, setListData] = useState([]);
@@ -30,7 +30,7 @@ const Map = ({ navigation }) => {
 
   const handlePress = async (latitude, longitude) => {
     fetch(
-      "https://dreamkatchr.herokuapp.com/get20closest/" +
+      "https://dreamkatchr.herokuapp.com/get40closest/" +
         latitude +
         "/" +
         longitude
@@ -56,6 +56,23 @@ const Map = ({ navigation }) => {
     });
 
     handlePress(locationSearch.lat, locationSearch.lng);
+  };
+
+  const handleFilter = async (minPrice, maxPrice, minArea, maxArea, type) => {
+    fetch(
+      "https://dreamkatchr.herokuapp.com/filter/" + minPrice + "/" + maxPrice + "/" + minArea + "/" + maxArea + "/" + type
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        let dataConvert = [];
+        Object.keys(data).forEach((keys) => {
+          dataConvert.push(data[keys]);
+        });
+        setListData(dataConvert);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const HandleClickItem = (item) => {
@@ -111,7 +128,7 @@ const Map = ({ navigation }) => {
 
       <CustomButton
         styling={styles.filter}
-        HandleClickList={() => navigation.navigate("Filter")}
+        HandleClickList={() => navigation.navigate("Filter", {handleFilter})}
         icon="filter"
       />
     </SafeAreaView>

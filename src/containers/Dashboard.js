@@ -19,7 +19,6 @@ const Dashboard = () => {
         let graphic = [];
         let i = 0;
         let dataColor = [];
-        console.log(data);
         Object.keys(data).forEach((keys) => {
           graphic.push({
             y: Math.round(parseFloat(data[keys].ti_le) * 3.5),
@@ -35,7 +34,7 @@ const Dashboard = () => {
         console.error(error);
       });
   };
-  console.log(graphicData.length);
+
   if (graphicData.length == 0) {
     getData();
   }
