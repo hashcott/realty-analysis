@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import SearchBar from "../components/SearchBar";
 import Carousel from "../components/Carousel/Carousel";
 import CustomButton from "../components/CustomButton";
 import ItemLocation from "../components/Item";
 import * as Location from "expo-location";
 
-const Map = ({ navigation, route}) => {
+const Map = ({ navigation, route }) => {
   const [displayList, setDisplayList] = useState(false);
   const [location, setLocation] = useState({});
   const [listData, setListData] = useState([]);
@@ -60,7 +60,16 @@ const Map = ({ navigation, route}) => {
 
   const handleFilter = async (minPrice, maxPrice, minArea, maxArea, type) => {
     fetch(
-      "https://dreamkatchr.herokuapp.com/filter/" + minPrice + "/" + maxPrice + "/" + minArea + "/" + maxArea + "/" + type
+      "https://dreamkatchr.herokuapp.com/filter/" +
+        minPrice +
+        "/" +
+        maxPrice +
+        "/" +
+        minArea +
+        "/" +
+        maxArea +
+        "/" +
+        type
     )
       .then((response) => response.json())
       .then((data) => {
@@ -87,6 +96,24 @@ const Map = ({ navigation, route}) => {
     <ItemLocation item={item} HandleClick={HandleClickItem} />
   );
 
+  const mapMarkers = () => {
+    return listData.map((data) => {
+      console.log(data);
+      return (
+        <Marker
+          // key={listData.}
+
+          coordinate={{
+            latitude: parseFloat(data.latitude),
+            longitude: parseFloat(data.longitude),
+          }}
+          title={data.giaCa}
+          // pinColor="yellow"
+        ></Marker>
+      );
+    });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, top: 20, backgroundColor: "white" }}>
       {!displayList && (
@@ -102,6 +129,12 @@ const Map = ({ navigation, route}) => {
                 longitudeDelta: 0.0421,
               }}
             />
+            {/* <Marker
+              coordinate={{latitude: location.latitude,
+                longitude: location.longitude }}
+              title={"current"}
+            />
+            {mapMarkers()} */}
           </View>
 
           <Carousel HandleClick={HandleClickItem} data={listData} />
@@ -124,11 +157,11 @@ const Map = ({ navigation, route}) => {
         />
       )}
 
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar handleSearch={handleSearch} styling={styles.searchBar}/>
 
       <CustomButton
         styling={styles.filter}
-        HandleClickList={() => navigation.navigate("Filter", {handleFilter})}
+        HandleClickList={() => navigation.navigate("Filter", { handleFilter })}
         icon="filter"
       />
     </SafeAreaView>
@@ -154,6 +187,7 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+    marginBottom: 15,
   },
   listContainer: {
     flex: 1,
@@ -162,6 +196,13 @@ const styles = StyleSheet.create({
     top: 90,
     height: 470,
   },
+  searchBar: {
+    position: "absolute",
+    left: 20,
+    top: 20,
+    right: 80,
+    zIndex: 1,
+  }
 });
 
 const mapStateToProps = (state) => {

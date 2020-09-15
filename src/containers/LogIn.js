@@ -21,7 +21,7 @@ const LogIn = (props) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => props.navigation.navigate("Loading"))
+      .then(() => props.navigation.navigate("Dashboard"))
       .catch((error) => setErrorMessage(error.message));
   };
   return (

@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons";
 
 const SearchBar = (props) => {
   return (
-    <View style={styles.searchBar}>
+    <View style={{ ...styles.searchBar, ...props.styling }}>
       <Feather
         style={{ padding: 12, paddingRight: 0 }}
         name="search"
@@ -21,7 +21,6 @@ const SearchBar = (props) => {
         fetchDetails={true}
         onPress={(data, details = null) => props.handleSearch(details)}
         query={{
-          // available options: https://developers.google.com/places/web-service/autocomplete
           key: "AIzaSyAhuvkbu8iQU3vptKQSbaHQNlTJv0ndTVw",
           language: "vn", // language of the results
           // types: '(cities)', // default: 'geocode'
@@ -53,11 +52,6 @@ const SearchBar = (props) => {
 const styles = StyleSheet.create({
   searchBar: {
     flexDirection: "row",
-    position: "absolute",
-    left: 20,
-    top: 20,
-    right: 80,
-    zIndex: 1,
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {

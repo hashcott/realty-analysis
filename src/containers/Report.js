@@ -4,6 +4,7 @@ import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
 import { DATA } from "../DummyData";
 import ItemReport from "../components/ItemReport";
+import SearchBar from "../components/SearchBar";
 
 
 const Report = ({navigation}) => {
@@ -19,11 +20,16 @@ const Report = ({navigation}) => {
   }
   const renderItem = ({ item, navigation }) => <ItemReport item={item} HandleClick={HandleClick} />;
 
+  const handleSearch = (detail) => {
+    console.log(detail);
+  }
+  
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Text style={styles.subtitle}>
         Tháng 1 - Tháng 6
       </Text>
+      <SearchBar styling={{}} handleSearch={handleSearch}/>
       <View style={styles.container}>
         <FlatList data={DATA} renderItem={renderItem}/>
       </View>
@@ -42,5 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor : "#e8e8e8"
   },
+
   subtitle: { marginVertical: 8 , fontSize: 18, fontWeight: "bold", textAlign: "center" },
 });
