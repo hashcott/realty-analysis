@@ -15,7 +15,7 @@ export default class SliderEntry extends Component {
 
   get image() {
     const {
-      data: { illustration },
+      data: { imgSrc },
       parallax,
       parallaxProps,
       even,
@@ -23,7 +23,7 @@ export default class SliderEntry extends Component {
 
     return parallax ? (
       <ParallaxImage
-        source={{ uri: illustration }}
+        source={{ uri: imgSrc }}
         containerStyle={[
           styles.imageContainer,
           even ? styles.imageContainerEven : {},
@@ -35,7 +35,7 @@ export default class SliderEntry extends Component {
         {...parallaxProps}
       />
     ) : (
-      <Image source={{ uri: illustration }} style={styles.image} />
+      <Image source={{ uri: imgSrc }} style={styles.image} />
     );
   }
 
@@ -63,7 +63,7 @@ export default class SliderEntry extends Component {
         onPress={() => this.props.HandleClick(this.props.data)}
       >
         <View style={{ flexDirection: "row" }}>
-          {/* <View style={{ width: 100, height: 100 }}>{this.image}</View> */}
+          <View style={{ width: 100, height: 100 }}>{this.image}</View>
           <View
             style={[styles.textContainer, even ? styles.textContainerEven : {}]}
           >
@@ -74,7 +74,7 @@ export default class SliderEntry extends Component {
                 style={[styles.subtitle, even ? styles.subtitleEven : {}]}
                 numberOfLines={1}
               >
-                {giaCa}
+                {giaCa} tỷ
               </Text>
             </View>
           </View>

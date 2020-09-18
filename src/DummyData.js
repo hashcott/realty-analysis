@@ -22,7 +22,6 @@ export const DATA = [
   {
     id: 1,
     x: "Chung cư cao cấp",
-    color: "red",
     reportData: [
       { month: 1, price: 2.0 },
       { month: 2, price: 3.4 },
@@ -33,7 +32,7 @@ export const DATA = [
     ],
     predict: "decrease",
     predictText:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
+      "1-2 tháng tới, giá nhà này sẽ tăng ... tỷ so với tháng này",
   },
   {
     id: 2,

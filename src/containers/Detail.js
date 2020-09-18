@@ -19,13 +19,13 @@ const Detail = ({ navigation, route }) => {
     parseFloat(route.params.longitude)
   );
 
-  console.log(latitude + " " + longitude);
+
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.info}>
           <Image
-            source={{ uri: route.params.illustration }}
+            source={{ uri: route.params.imgSrc }}
             style={styles.picture}
           />
           <Text style={styles.name}>{route.params.title}</Text>

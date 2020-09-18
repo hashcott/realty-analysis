@@ -30,7 +30,7 @@ const Map = ({ navigation, route }) => {
 
   const handlePress = async (latitude, longitude) => {
     fetch(
-      "https://dreamkatchr.herokuapp.com/get40closest/" +
+      "https://dreamkatchr.herokuapp.com/get30closest/" +
         latitude +
         "/" +
         longitude
@@ -85,6 +85,7 @@ const Map = ({ navigation, route }) => {
   };
 
   const HandleClickItem = (item) => {
+    console.log(item)
     navigation.navigate("Detail", item);
   };
 
@@ -129,12 +130,12 @@ const Map = ({ navigation, route }) => {
                 longitudeDelta: 0.0421,
               }}
             />
-            {/* <Marker
-              coordinate={{latitude: location.latitude,
-                longitude: location.longitude }}
+            <Marker
+              coordinate={{latitude: 21.0278,
+                longitude: 105.8342 }}
               title={"current"}
             />
-            {mapMarkers()} */}
+            {/* {mapMarkers()} */}
           </View>
 
           <Carousel HandleClick={HandleClickItem} data={listData} />

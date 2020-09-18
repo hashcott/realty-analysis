@@ -83,7 +83,7 @@ const ReportTopTab = () => {
   return (
     <TopTab.Navigator>
       <TopTab.Screen name="Predict Report" component={ReportStackScreen} />
-      <TopTab.Screen name="CustomPredict" component={CustomPredict} />
+      <TopTab.Screen name="Custom Predict" component={CustomPredict} />
     </TopTab.Navigator>
   )
 }

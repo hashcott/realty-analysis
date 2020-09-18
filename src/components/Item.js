@@ -13,7 +13,7 @@ const ItemLocation = ({ item, HandleClick }) => {
     >
       <View style={{ flexDirection: "row" }}>
         <View style={{ width: 120, height: 120 }}>
-          {/* <Image source={{ uri: item.illustration }} style={extraStyle.image} /> */}
+          <Image source={{ uri: item.imgSrc }} style={extraStyle.image} />
         </View>
         <View style={{ ...extraStyle.textContainer, width: 250 }}>
           <Text style={extraStyle.title} numberOfLines={2}>
