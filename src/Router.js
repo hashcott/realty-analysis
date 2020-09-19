@@ -32,6 +32,8 @@ const Tab = createBottomTabNavigator();
 const DashboardStack = createStackNavigator();
 const MapStack = createStackNavigator();
 const ReportStack = createStackNavigator();
+const PredictStack = createStackNavigator();
+const CustomPredictStack = createStackNavigator();
 const TopTab = createMaterialTopTabNavigator();
 
 const Stack = createStackNavigator();
@@ -73,8 +75,7 @@ const MapStackScreen = () => {
 const ReportStackScreen = () => {
   return (
     <ReportStack.Navigator>
-      <ReportStack.Screen name="Predict Report" component={Report} options={{ headerShown: false }} />
-      <ReportStack.Screen name="DetailReport" component={DetailReport} />
+      <ReportStack.Screen name="Predict Report" component={ReportTopTab} />
     </ReportStack.Navigator>
   );
 };
@@ -82,10 +83,28 @@ const ReportStackScreen = () => {
 const ReportTopTab = () => {
   return (
     <TopTab.Navigator>
-      <TopTab.Screen name="Predict Report" component={ReportStackScreen} />
-      <TopTab.Screen name="Custom Predict" component={CustomPredict} />
+      <TopTab.Screen name="Predict Report" component={ReportLeft} />
+      <TopTab.Screen name="Custom Predict" component={ReportRight} />
     </TopTab.Navigator>
   )
+}
+
+
+const ReportLeft = () => {
+  return (
+    <PredictStack.Navigator>
+      <PredictStack.Screen name="Predict" component={Report} />
+      <PredictStack.Screen name="DetailReport" component={DetailReport} />
+    </PredictStack.Navigator>
+  );
+}
+
+const ReportRight = () => {
+  return (
+    <CustomPredictStack.Navigator>
+      <CustomPredictStack.Screen name="Custom Predict" component={CustomPredict} />
+    </CustomPredictStack.Navigator>
+  );
 }
 
 const MainScreen = () => {
@@ -104,13 +123,13 @@ const MainScreen = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
+        activeTintColor: "red",
+        inactiveTintColor: "black",
       }}
     >
       <Tab.Screen name="Map" component={MapStackScreen} />
       <Tab.Screen name="Dashboard" component={DashboardStackScreen} />
-      <Tab.Screen name="Report" component={ReportTopTab} />
+      <Tab.Screen name="Report" component={ReportStackScreen} />
     </Tab.Navigator>
   );
 };

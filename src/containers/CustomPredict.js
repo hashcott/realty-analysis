@@ -17,24 +17,57 @@ import SelectMultiple from "react-native-select-multiple";
 
 const CustomPredict = ({ navigation }) => {
   const [district, setDistrict] = useState("");
+  const [location, setLocation] = useState({});
   const [type, setType] = useState("");
   const [araeValue, setaAraeValue] = useState(1);
   const [bedroom, setBedroom] = useState(1);
   const [floor, setFloor] = useState(1);
   const [bathroom, setBathroom] = useState(1);
   const [legal, setLegal] = useState(0);
-  const [attribute, setAttribute] = useState({});
-  const [tienIch, setTienIch] = useState({});
-  const [noiThat, setNoiThat] = useState({});
+  const [attribute, setAttribute] = useState([]);
+  const [tienIch, setTienIch] = useState([]);
+  const [noiThat, setNoiThat] = useState([]);
 
-  const handlePress = (detail) => {
-    console.log(detail);
+  const handleSearch = (detail) => {
+    console.log(detail.address_components)
+    const locationSearch = detail.geometry.location;
+    setLocation({
+      latitude: locationSearch.lat,
+      longitude: locationSearch.lng,
+    });
   };
 
+  const handleApplied = () => {
+    attributeString = toString(attribute);
+    tienIchString = toString(tienIch);
+    noiThatString = toString(noiThat);
+
+    fetch(
+      'https://dreamkatchr.herokuapp.com/predictHouse/' + location.longitude + '/' + location.longitude + '/' + type + '/' + araeValue + '/' + floor + '/' + bedroom + '/' + bathroom + '/' + legal + '/' + attributeString + '/' + tienIchString + '/' + noiThatString 
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        let dataConvert = [];
+        Object.keys(data).forEach((keys) => {
+          dataConvert.push(data[keys]);
+        });
+        setListData(dataConvert);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+  }
+
+  const toString = (list) => {
+    result = ''
+    list.forEach(item => result += item.value);
+    return result;
+  }
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
       <Text style={styles.textInput}>Nhập địa điểm muốn dự đoán</Text>
-      <SearchBar handlePress={handlePress} />
+      <SearchBar handleSearch={handleSearch} />
       <Text style={styles.textInput}>Chọn loại hình bất động sản</Text>
       <RNPickerSelect
         onValueChange={(value) => setType(value)}
@@ -96,7 +129,7 @@ const CustomPredict = ({ navigation }) => {
           "Gần chợ",
         ]}
         selectedItems={attribute}
-        onSelectionsChange={(selectedItem) => setAttribute({ selectedItem })}
+        onSelectionsChange={(selectedItem) => setAttribute(selectedItem)}
       />
       <Text style={styles.textInput}>Tiện ích kèm theo</Text>
       <SelectMultiple
@@ -111,7 +144,7 @@ const CustomPredict = ({ navigation }) => {
           "Internet",
         ]}
         selectedItems={tienIch}
-        onSelectionsChange={(selectedItem) => setTienIch({ selectedItem })}
+        onSelectionsChange={(selectedItem) => setTienIch(selectedItem)}
       />
       <Text style={styles.textInput}>Nội Thất</Text>
       <SelectMultiple
@@ -131,12 +164,13 @@ const CustomPredict = ({ navigation }) => {
           "Bồn tắm",
         ]}
         selectedItems={noiThat}
-        onSelectionsChange={(selectedItem) => setNoiThat({ selectedItem })}
+        onSelectionsChange={(selectedItem) => setNoiThat(selectedItem)}
       />
       <Button
         // onPress={() => navigation.navigate("Map", { minPrice, maxPrice, minArea, maxArea, type})}
         // onPress={() =>  { route.params.handleFilter(minPrice, maxPrice, minArea, maxArea, type);
         //   navigation.navigate("Map")}}
+        onPress={() => handleApplied()}
         title="Apply"
         color="black"
       />

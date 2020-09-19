@@ -28,10 +28,10 @@ const Detail = ({ navigation, route }) => {
             source={{ uri: route.params.imgSrc }}
             style={styles.picture}
           />
-          <Text style={styles.name}>{route.params.title}</Text>
-          <Text style={styles.location}>{route.params.subtitle}</Text>
+          <Text style={styles.name}>{route.params.diaChi}</Text>
+          <Text style={styles.location}>{route.params.giaCa} tỷ</Text>
         </View>
-        <View>
+        {/* <View>
           <SpinnerButton buttonStyle={styles.buttonFollow}>
             <Text style={{ color: "white" }}>Follow</Text>
           </SpinnerButton>
@@ -40,10 +40,9 @@ const Detail = ({ navigation, route }) => {
           <SpinnerButton buttonStyle={styles.buttonCall}>
             <Text style={{ color: "black" }}>Call</Text>
           </SpinnerButton>
-        </View>
+        </View> */}
         <View style={styles.info2}>
-          <Text style={styles.infoText}>Mô tả: {route.params.moTa}</Text>
-          <Text style={styles.infoText}>
+        <Text style={styles.infoText}>
             Số lượng tầng: {route.params.soTang}
           </Text>
           <Text style={styles.infoText}>
@@ -52,8 +51,22 @@ const Detail = ({ navigation, route }) => {
           <Text style={styles.infoText}>
             Số lượng phòng ngủ: {route.params.soPhongNgu}
           </Text>
+          <Text style={styles.infoText}>
+            Pháp lý: {route.params.phapLy == 1 ? 'Có sổ đỏ' : 'Không có sổ đỏ'}
+          </Text>
+          <Text style={styles.infoText}>
+            Ngày đăng tin: {route.params.ngayDangTin}
+          </Text>
+          <Text style={styles.infoText}>
+            Ngày hết hạn: {route.params.ngayHetHan}
+          </Text>
+          <Text style={styles.infoText}>Mô tả: {route.params.moTa}</Text>
+          
         </View>
-        <View>
+        <View style={{alignItems: 'center'}}>
+        <Text style={{fontWeight: 'bold', fontSize: 22, marginBottom: 10}}>
+            Vị trí
+          </Text>
           <View style={{ width: 400, height: 300 }}>
             <MapView
               style={styles.map}
@@ -61,8 +74,8 @@ const Detail = ({ navigation, route }) => {
               region={{
                 latitude: latitude,
                 longitude: longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: 0.0422,
+                longitudeDelta: 0.0151,
               }}
               scrollEnabled={false}
               zoomTapEnabled
@@ -93,12 +106,15 @@ const styles = StyleSheet.create({
     backgroundColor: "pink",
   },
   name: {
-    fontSize: 18,
+    fontSize: 22,
     fontStyle: "italic",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 5
   },
   location: {
     fontWeight: "bold",
-    fontSize: 14,
+    fontSize: 18,
   },
   info2: {
     marginHorizontal: 20,

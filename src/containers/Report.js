@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
@@ -8,6 +8,8 @@ import SearchBar from "../components/SearchBar";
 
 
 const Report = ({navigation}) => {
+  const [listData, setListData] = useState([]);
+
   const HandleClick = (item) => {
     let type= item.x;
     let data= item.reportData;
@@ -21,7 +23,28 @@ const Report = ({navigation}) => {
   const renderItem = ({ item, navigation }) => <ItemReport item={item} HandleClick={HandleClick} />;
 
   const handleSearch = (detail) => {
-    console.log(detail);
+    console.log(detail.formatted_address);
+    const address = detail.formatted_address;
+    const temp = address.split(', ');
+    const district = temp[temp.length - 3];
+    console.log(district);
+    const locationSearch = detail.geometry.location;
+    const latitude= locationSearch.lat;
+    const longitude= locationSearch.lng;
+    console.log(latitude);
+    
+    fetch('https://dreamkatchr.herokuapp.com/predictByType/' + district + '/' + longitude + '/'+ latitude)
+      .then((response) => response.json())
+      .then((data) => {
+        let dataConvert = [];
+        Object.keys(data).forEach((keys) => {
+          dataConvert.push(data[keys]);
+        });
+        setListData(dataConvert);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   
   return (

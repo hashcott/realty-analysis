@@ -11,7 +11,8 @@ import * as Location from "expo-location";
 
 const Map = ({ navigation, route }) => {
   const [displayList, setDisplayList] = useState(false);
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState({latitude: 21.0278,
+    longitude: 105.8342 });
   const [listData, setListData] = useState([]);
 
   useEffect(() => {
@@ -99,18 +100,17 @@ const Map = ({ navigation, route }) => {
 
   const mapMarkers = () => {
     return listData.map((data) => {
-      console.log(data);
+      // console.log(data.latitude + " " + data.longitude);
       return (
         <Marker
-          // key={listData.}
-
+          key={listData['']}
           coordinate={{
             latitude: parseFloat(data.latitude),
             longitude: parseFloat(data.longitude),
           }}
           title={data.giaCa}
           // pinColor="yellow"
-        ></Marker>
+        />
       );
     });
   };
@@ -126,16 +126,18 @@ const Map = ({ navigation, route }) => {
               region={{
                 latitude: location.latitude,
                 longitude: location.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: 0.0622,
+                longitudeDelta: 0.0201,
               }}
-            />
+            >
             <Marker
-              coordinate={{latitude: 21.0278,
-                longitude: 105.8342 }}
+              coordinate={{
+                latitude: location.latitude,
+                longitude: location.longitude}}
               title={"current"}
             />
-            {/* {mapMarkers()} */}
+            {mapMarkers()}
+            </MapView>
           </View>
 
           <Carousel HandleClick={HandleClickItem} data={listData} />
