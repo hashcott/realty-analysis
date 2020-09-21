@@ -31,12 +31,9 @@ const Map = ({ navigation, route }) => {
 
   const handlePress = async (latitude, longitude) => {
     fetch(
-      "https://dreamkatchr.herokuapp.com/get30closest/" +
-        latitude +
-        "/" +
-        longitude
+      "https://dreamkatchr.herokuapp.com/get30closest/" + latitude + "/" + longitude
     )
-      .then((response) => response.json())
+      .then((response) => {console.log(response); return response.json()})
       .then((data) => {
         let dataConvert = [];
         Object.keys(data).forEach((keys) => {
@@ -72,7 +69,7 @@ const Map = ({ navigation, route }) => {
         "/" +
         type
     )
-      .then((response) => response.json())
+      .then((response) => {console.log(response); return response.json()})
       .then((data) => {
         let dataConvert = [];
         Object.keys(data).forEach((keys) => {
@@ -100,7 +97,6 @@ const Map = ({ navigation, route }) => {
 
   const mapMarkers = () => {
     return listData.map((data) => {
-      // console.log(data.latitude + " " + data.longitude);
       return (
         <Marker
           key={listData['']}
@@ -109,7 +105,6 @@ const Map = ({ navigation, route }) => {
             longitude: parseFloat(data.longitude),
           }}
           title={data.giaCa}
-          // pinColor="yellow"
         />
       );
     });

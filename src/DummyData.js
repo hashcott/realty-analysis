@@ -17,6 +17,18 @@ export const graphicColor = [
   "tomato",
   "gray",
 ];
+export const a = 
+  {
+    id: 1,
+    x: "Chung cư cao cấp",
+    reportData: [
+      { month: 1, price: 5.0 },
+      { month: 2, price: 5.0 },
+    ],
+    predict: "không đổi",
+    predictText:
+      "1-2 tháng tới, giá nhà này sẽ không tăng so với tháng này",
+  }
 
 export const DATA = [
   {

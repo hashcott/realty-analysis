@@ -17,7 +17,7 @@ const SearchBar = (props) => {
         minLength={2}
         autoFocus={false}
         returnKeyType={"default"}
-        listViewDisplayed={true}
+        listViewDisplayed={false}
         fetchDetails={true}
         onPress={(data, details = null) => props.handleSearch(details)}
         query={{

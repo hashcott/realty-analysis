@@ -4,19 +4,15 @@ import {
   Text,
   ScrollView,
   TextInput,
-  SafeAreaView,
-  View,
   Button,
 } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
-import ItemReport from "../components/ItemReport";
 import SearchBar from "../components/SearchBar";
 import RNPickerSelect from "react-native-picker-select";
 import SelectMultiple from "react-native-select-multiple";
 
 const CustomPredict = ({ navigation }) => {
-  const [district, setDistrict] = useState("");
   const [location, setLocation] = useState({});
   const [type, setType] = useState("");
   const [araeValue, setaAraeValue] = useState(1);
@@ -28,8 +24,66 @@ const CustomPredict = ({ navigation }) => {
   const [tienIch, setTienIch] = useState([]);
   const [noiThat, setNoiThat] = useState([]);
 
+  const handleApplied = () => {
+    const attributeString = toString(attribute);
+    const tienIchString = toString(tienIch);
+    const noiThatString = toString(noiThat);
+
+    console.log(location);
+
+    fetch(
+      "https://dreamkatchr.herokuapp.com/predictHouse/" +
+        location.longitude +
+        "/" +
+        location.latitude +
+        "/" +
+        type +
+        "/" +
+        araeValue +
+        "/" +
+        floor +
+        "/" +
+        bedroom +
+        "/" +
+        bathroom +
+        "/" +
+        legal +
+        "/" +
+        attributeString +
+        "/" +
+        tienIchString +
+        "/" +
+        noiThatString
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        let dataConvert;
+        for (var value of Object.values(data)) {
+          console.log(value);
+          dataConvert = value;
+        }
+      
+        let type = dataConvert.loai;
+        let data1 = dataConvert.reportData;
+        let predictText = dataConvert.trend;
+        navigation.navigate("DetailReport", {
+          type,
+          data: data1,
+          predictText,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const toString = (list) => {
+    let result = "";
+    list.forEach((item) => (result += item.value + ", "));
+    return result;
+  };
+
   const handleSearch = (detail) => {
-    console.log(detail.address_components)
     const locationSearch = detail.geometry.location;
     setLocation({
       latitude: locationSearch.lat,
@@ -37,37 +91,13 @@ const CustomPredict = ({ navigation }) => {
     });
   };
 
-  const handleApplied = () => {
-    attributeString = toString(attribute);
-    tienIchString = toString(tienIch);
-    noiThatString = toString(noiThat);
-
-    fetch(
-      'https://dreamkatchr.herokuapp.com/predictHouse/' + location.longitude + '/' + location.longitude + '/' + type + '/' + araeValue + '/' + floor + '/' + bedroom + '/' + bathroom + '/' + legal + '/' + attributeString + '/' + tienIchString + '/' + noiThatString 
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        let dataConvert = [];
-        Object.keys(data).forEach((keys) => {
-          dataConvert.push(data[keys]);
-        });
-        setListData(dataConvert);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-  }
-
-  const toString = (list) => {
-    result = ''
-    list.forEach(item => result += item.value);
-    return result;
-  }
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      style={{ flex: 1, backgroundColor: "white" }}
+    >
       <Text style={styles.textInput}>Nhập địa điểm muốn dự đoán</Text>
-      <SearchBar handleSearch={handleSearch} />
+      <SearchBar styling={{}} handleSearch={handleSearch} />
       <Text style={styles.textInput}>Chọn loại hình bất động sản</Text>
       <RNPickerSelect
         onValueChange={(value) => setType(value)}
@@ -167,10 +197,7 @@ const CustomPredict = ({ navigation }) => {
         onSelectionsChange={(selectedItem) => setNoiThat(selectedItem)}
       />
       <Button
-        // onPress={() => navigation.navigate("Map", { minPrice, maxPrice, minArea, maxArea, type})}
-        // onPress={() =>  { route.params.handleFilter(minPrice, maxPrice, minArea, maxArea, type);
-        //   navigation.navigate("Map")}}
-        onPress={() => handleApplied()}
+        onPress={handleApplied}
         title="Apply"
         color="black"
       />
@@ -190,7 +217,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e8e8e8",
   },
   textInput: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "500",
   },
   subtitle: {

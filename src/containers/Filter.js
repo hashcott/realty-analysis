@@ -18,7 +18,7 @@ const Filter = ({ navigation, route }) => {
   };
 
   const getData = async () => {
-    fetch("https://dreamkatchr.herokuapp.com/getPercentEachType")
+    fetch("https://dreamkatchr.herokuapp.com/getPercentEachType/filter")
       .then((response) => response.json())
       .then((data) => {
         let dataTemp = [];
@@ -85,7 +85,6 @@ const Filter = ({ navigation, route }) => {
       />
 
       <Button
-        // onPress={() => navigation.navigate("Map", { minPrice, maxPrice, minArea, maxArea, type})}
         onPress={() =>  { route.params.handleFilter(minPrice, maxPrice, minArea, maxArea, type); 
           navigation.navigate("Map")}}
         title="Apply"

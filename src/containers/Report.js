@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
-import { DATA } from "../DummyData";
 import ItemReport from "../components/ItemReport";
 import SearchBar from "../components/SearchBar";
 
@@ -11,9 +10,10 @@ const Report = ({navigation}) => {
   const [listData, setListData] = useState([]);
 
   const HandleClick = (item) => {
-    let type= item.x;
+    console.log(item);
+    let type= item.loai;
     let data= item.reportData;
-    let predictText = item.predictText;
+    let predictText = item.trend;
     navigation.navigate('DetailReport', {
       type,
       data,
@@ -23,23 +23,20 @@ const Report = ({navigation}) => {
   const renderItem = ({ item, navigation }) => <ItemReport item={item} HandleClick={HandleClick} />;
 
   const handleSearch = (detail) => {
-    console.log(detail.formatted_address);
     const address = detail.formatted_address;
     const temp = address.split(', ');
     const district = temp[temp.length - 3];
-    console.log(district);
     const locationSearch = detail.geometry.location;
     const latitude= locationSearch.lat;
     const longitude= locationSearch.lng;
-    console.log(latitude);
     
     fetch('https://dreamkatchr.herokuapp.com/predictByType/' + district + '/' + longitude + '/'+ latitude)
       .then((response) => response.json())
       .then((data) => {
         let dataConvert = [];
-        Object.keys(data).forEach((keys) => {
-          dataConvert.push(data[keys]);
-        });
+        for (var value of Object.values(data)) {
+          dataConvert.push(value)
+      }
         setListData(dataConvert);
       })
       .catch((error) => {
@@ -54,7 +51,7 @@ const Report = ({navigation}) => {
       </Text>
       <SearchBar styling={{}} handleSearch={handleSearch}/>
       <View style={styles.container}>
-        <FlatList data={DATA} renderItem={renderItem}/>
+        <FlatList data={listData} renderItem={renderItem}/>
       </View>
     </View>
   );

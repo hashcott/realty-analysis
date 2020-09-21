@@ -16,7 +16,6 @@ import CustomPredict from "./containers/CustomPredict";
 
 import Login from "./containers/LogIn";
 import Signup from "./containers/SignUp";
-import Loading from "./containers/Loading";
 
 // icon
 import { Feather } from "@expo/vector-icons";
@@ -76,6 +75,7 @@ const ReportStackScreen = () => {
   return (
     <ReportStack.Navigator>
       <ReportStack.Screen name="Predict Report" component={ReportTopTab} />
+      <ReportStack.Screen name="DetailReport" component={DetailReport} />
     </ReportStack.Navigator>
   );
 };
@@ -103,6 +103,7 @@ const ReportRight = () => {
   return (
     <CustomPredictStack.Navigator>
       <CustomPredictStack.Screen name="Custom Predict" component={CustomPredict} />
+      <CustomPredictStack.Screen name="DetailReport" component={DetailReport} />
     </CustomPredictStack.Navigator>
   );
 }

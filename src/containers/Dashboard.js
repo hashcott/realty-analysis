@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
 import { VictoryPie } from "victory-native";
-
 import { graphicColor } from "../DummyData";
-import { set } from "react-native-reanimated";
 
 const Dashboard = () => {
   console.disableYellowBox = true;
@@ -14,7 +12,7 @@ const Dashboard = () => {
 
   const getData = async () => {
     fetch("https://dreamkatchr.herokuapp.com/getPercentEachType")
-      .then((response) => response.json())
+      .then((response) => {console.log(response); return response.json()})
       .then((data) => {
         let graphic = [];
         let i = 0;
