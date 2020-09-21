@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import { Octicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, TextInput,Image } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import firebase from "firebase";
@@ -10,6 +9,7 @@ const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+
   const signup = useCallback(() => {
     handleSignUp();
   }, [handleSignUp, email, password]);
@@ -23,11 +23,13 @@ const SignUp = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Octicons name="home" size={70} color="deepskyblue" />
-
+        <Image
+        style={styles.logo}
+        source={require('./../../assets/logo.png')}
+      />
         <Text
           style={{
-            color: "#000",
+            color: "#FFF",
             marginTop: 10,
             fontSize: 24,
             fontWeight: "bold",
@@ -74,11 +76,11 @@ const SignUp = (props) => {
         onPress={() => props.navigation.navigate("Login")}
         buttonStyle={styles.buttonBottom}
       >
-        <Text style={{ color: "#bbb", fontWeight: "bold", fontSize: 16 }}>
+        <Text style={{ color: "white", fontWeight: "700", fontSize: 16 }}>
           Have a account?{" "}
         </Text>
         <Text
-          style={{ color: "deepskyblue", fontWeight: "bold", fontSize: 16 }}
+          style={{ color: "red", fontWeight: "bold", fontSize: 16 }}
         >
           Sign in
         </Text>
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     paddingTop: 120,
-    backgroundColor: "white",
+    backgroundColor: "black",
   },
   header: {
     alignItems: "center",
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: "#bbb",
     borderRadius: 10,
-    padding: 20,
+    padding: 12,
     marginVertical: 8,
   },
   buttonStyle: {
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
     width: 380,
-    backgroundColor: "deepskyblue",
+    backgroundColor: "red",
     borderRadius: 10,
   },
   buttonBottom: {
@@ -123,7 +125,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "black",
+  },
+  logo: {
+    width: 180,
+    height: 180,
   },
 });
 export default SignUp;

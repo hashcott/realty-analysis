@@ -1,3 +1,7 @@
+import { dataTest } from "./containers/Loading";
+
+export const test = dataTest;
+
 export const graphicData = [
   { y: 30, label: "30%" },
   { y: 40, label: "40%" },
@@ -5,13 +9,31 @@ export const graphicData = [
   { y: 20, label: "20%" },
 ];
 
-export const graphicColor = ["red", "blue", "yellow", "green", "tomato"];
+export const graphicColor = [
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "tomato",
+  "gray",
+];
+export const a = 
+  {
+    id: 1,
+    x: "Chung cư cao cấp",
+    reportData: [
+      { month: 1, price: 5.0 },
+      { month: 2, price: 5.0 },
+    ],
+    predict: "không đổi",
+    predictText:
+      "1-2 tháng tới, giá nhà này sẽ không tăng so với tháng này",
+  }
 
 export const DATA = [
   {
     id: 1,
     x: "Chung cư cao cấp",
-    color: "red",
     reportData: [
       { month: 1, price: 2.0 },
       { month: 2, price: 3.4 },
@@ -21,7 +43,8 @@ export const DATA = [
       { month: 6, price: 4.0 },
     ],
     predict: "decrease",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "1-2 tháng tới, giá nhà này sẽ tăng ... tỷ so với tháng này",
   },
   {
     id: 2,
@@ -36,7 +59,8 @@ export const DATA = [
       { month: 6, price: 5.0 },
     ],
     predict: "decrease",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
   {
     id: 3,
@@ -51,7 +75,8 @@ export const DATA = [
       { month: 6, price: 4.0 },
     ],
     predict: "increase",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
   {
     id: 4,
@@ -66,7 +91,8 @@ export const DATA = [
       { month: 6, price: 8.0 },
     ],
     predict: "increase",
-    predictText: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt."
+    predictText:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmo tempor invidunt.",
   },
 ];
 

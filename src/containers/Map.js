@@ -1,18 +1,89 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
 import { createExample } from "../actions/Example";
 import { connect } from "react-redux";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import SearchBar from "../components/SearchBar";
 import Carousel from "../components/Carousel/Carousel";
 import CustomButton from "../components/CustomButton";
 import ItemLocation from "../components/Item";
-import { ENTRIES } from "../DummyData";
+import * as Location from "expo-location";
 
-const Map = ({ navigation }) => {
+const Map = ({ navigation, route }) => {
   const [displayList, setDisplayList] = useState(false);
+  const [location, setLocation] = useState({latitude: 21.0278,
+    longitude: 105.8342 });
+  const [listData, setListData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      let { latitude, longitude } = location.coords;
+      setLocation({ latitude, longitude });
+      handlePress(latitude, longitude);
+    })();
+  }, []);
+
+  const handlePress = async (latitude, longitude) => {
+    fetch(
+      "https://dreamkatchr.herokuapp.com/get30closest/" + latitude + "/" + longitude
+    )
+      .then((response) => {console.log(response); return response.json()})
+      .then((data) => {
+        let dataConvert = [];
+        Object.keys(data).forEach((keys) => {
+          dataConvert.push(data[keys]);
+        });
+        setListData(dataConvert);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleSearch = (detail) => {
+    const locationSearch = detail.geometry.location;
+    setLocation({
+      latitude: locationSearch.lat,
+      longitude: locationSearch.lng,
+    });
+
+    handlePress(locationSearch.lat, locationSearch.lng);
+  };
+
+  const handleFilter = async (minPrice, maxPrice, minArea, maxArea, type) => {
+    fetch(
+      "https://dreamkatchr.herokuapp.com/filter/" +
+        minPrice +
+        "/" +
+        maxPrice +
+        "/" +
+        minArea +
+        "/" +
+        maxArea +
+        "/" +
+        type
+    )
+      .then((response) => {console.log(response); return response.json()})
+      .then((data) => {
+        let dataConvert = [];
+        Object.keys(data).forEach((keys) => {
+          dataConvert.push(data[keys]);
+        });
+        setListData(dataConvert);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const HandleClickItem = (item) => {
+    console.log(item)
     navigation.navigate("Detail", item);
   };
 
@@ -24,6 +95,21 @@ const Map = ({ navigation }) => {
     <ItemLocation item={item} HandleClick={HandleClickItem} />
   );
 
+  const mapMarkers = () => {
+    return listData.map((data) => {
+      return (
+        <Marker
+          key={listData['']}
+          coordinate={{
+            latitude: parseFloat(data.latitude),
+            longitude: parseFloat(data.longitude),
+          }}
+          title={data.giaCa}
+        />
+      );
+    });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, top: 20, backgroundColor: "white" }}>
       {!displayList && (
@@ -33,15 +119,23 @@ const Map = ({ navigation }) => {
               style={styles.map}
               provider="google"
               region={{
-                latitude: 21.0227253,
-                longitude: 105.7669231,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                latitudeDelta: 0.0622,
+                longitudeDelta: 0.0201,
               }}
+            >
+            <Marker
+              coordinate={{
+                latitude: location.latitude,
+                longitude: location.longitude}}
+              title={"current"}
             />
+            {mapMarkers()}
+            </MapView>
           </View>
 
-          <Carousel HandleClick={HandleClickItem} />
+          <Carousel HandleClick={HandleClickItem} data={listData} />
 
           <CustomButton HandleClickList={HandleClickList} icon="list" />
         </View>
@@ -49,7 +143,7 @@ const Map = ({ navigation }) => {
 
       {displayList && (
         <View style={styles.listContainer}>
-          <FlatList data={ENTRIES} renderItem={renderItem} />
+          <FlatList data={listData} renderItem={renderItem} />
         </View>
       )}
 
@@ -61,22 +155,16 @@ const Map = ({ navigation }) => {
         />
       )}
 
-      <SearchBar />
+      <SearchBar handleSearch={handleSearch} styling={styles.searchBar}/>
 
       <CustomButton
         styling={styles.filter}
-        HandleClickList={() => navigation.navigate("Filter")}
+        HandleClickList={() => navigation.navigate("Filter", { handleFilter })}
         icon="filter"
       />
     </SafeAreaView>
   );
 };
-
-const mapStateToProps = (state) => {
-  return { ...state.example };
-};
-
-export default connect(mapStateToProps, { createExample })(Map);
 
 const styles = StyleSheet.create({
   edges: {
@@ -97,6 +185,7 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+    marginBottom: 15,
   },
   listContainer: {
     flex: 1,
@@ -105,4 +194,17 @@ const styles = StyleSheet.create({
     top: 90,
     height: 470,
   },
+  searchBar: {
+    position: "absolute",
+    left: 20,
+    top: 20,
+    right: 80,
+    zIndex: 1,
+  }
 });
+
+const mapStateToProps = (state) => {
+  return { ...state.example };
+};
+
+export default connect(mapStateToProps, { createExample })(Map);

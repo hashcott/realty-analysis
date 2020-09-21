@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { View, ScrollView } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import { ENTRIES } from "../../DummyData";
 import SliderEntry from "../SliderEntry/SliderEntry";
 import { sliderWidth, itemWidth } from "../SliderEntry/SliderEntry.style";
 import styles, { colors } from "./index.style";
@@ -32,7 +31,7 @@ const CarouselPlace = (props) => {
       <View style={styles.exampleContainer}>
         <Carousel
           ref={carouselRef}
-          data={ENTRIES}
+          data={props.data}
           renderItem={renderItemWithParallax}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
@@ -47,7 +46,7 @@ const CarouselPlace = (props) => {
           onSnapToItem={(index) => setslider1ActiveSlide(index)}
         />
         <Pagination
-          dotsLength={ENTRIES.length}
+          dotsLength={props.data.length}
           activeDotIndex={slider1ActiveSlide}
           containerStyle={styles.paginationContainer}
           dotColor={"rgba(255, 255, 255, 0.92)"}

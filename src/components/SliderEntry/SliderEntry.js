@@ -15,7 +15,7 @@ export default class SliderEntry extends Component {
 
   get image() {
     const {
-      data: { illustration },
+      data: { imgSrc },
       parallax,
       parallaxProps,
       even,
@@ -23,7 +23,7 @@ export default class SliderEntry extends Component {
 
     return parallax ? (
       <ParallaxImage
-        source={{ uri: illustration }}
+        source={{ uri: imgSrc }}
         containerStyle={[
           styles.imageContainer,
           even ? styles.imageContainerEven : {},
@@ -35,22 +35,22 @@ export default class SliderEntry extends Component {
         {...parallaxProps}
       />
     ) : (
-      <Image source={{ uri: illustration }} style={styles.image} />
+      <Image source={{ uri: imgSrc }} style={styles.image} />
     );
   }
 
   render() {
     const {
-      data: { title, subtitle },
+      data: { diaChi, giaCa },
       even,
     } = this.props;
 
-    const uppercaseTitle = title ? (
+    const uppercaseTitle = diaChi ? (
       <Text
         style={[styles.title, even ? styles.titleEven : {}]}
         numberOfLines={2}
       >
-        {title.toUpperCase()}
+        {diaChi.toUpperCase()}
       </Text>
     ) : (
       false
@@ -74,7 +74,7 @@ export default class SliderEntry extends Component {
                 style={[styles.subtitle, even ? styles.subtitleEven : {}]}
                 numberOfLines={1}
               >
-                {subtitle}
+                {giaCa} tỷ
               </Text>
             </View>
           </View>

@@ -3,6 +3,7 @@ import { Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 // import Screen
 import Dashboard from "./containers/Dashboard";
@@ -11,6 +12,7 @@ import Report from "./containers/Report";
 import Filter from "./containers/Filter";
 import DetailReport from "./containers/DetailReport";
 import Detail from "./containers/Detail";
+import CustomPredict from "./containers/CustomPredict";
 
 import Login from "./containers/LogIn";
 import Signup from "./containers/SignUp";
@@ -29,6 +31,9 @@ const Tab = createBottomTabNavigator();
 const DashboardStack = createStackNavigator();
 const MapStack = createStackNavigator();
 const ReportStack = createStackNavigator();
+const PredictStack = createStackNavigator();
+const CustomPredictStack = createStackNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const Stack = createStackNavigator();
 
@@ -69,11 +74,39 @@ const MapStackScreen = () => {
 const ReportStackScreen = () => {
   return (
     <ReportStack.Navigator>
-      <ReportStack.Screen name="Predict Report" component={Report} />
+      <ReportStack.Screen name="Predict Report" component={ReportTopTab} />
       <ReportStack.Screen name="DetailReport" component={DetailReport} />
     </ReportStack.Navigator>
   );
 };
+
+const ReportTopTab = () => {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Predict Report" component={ReportLeft} />
+      <TopTab.Screen name="Custom Predict" component={ReportRight} />
+    </TopTab.Navigator>
+  )
+}
+
+
+const ReportLeft = () => {
+  return (
+    <PredictStack.Navigator>
+      <PredictStack.Screen name="Predict" component={Report} />
+      <PredictStack.Screen name="DetailReport" component={DetailReport} />
+    </PredictStack.Navigator>
+  );
+}
+
+const ReportRight = () => {
+  return (
+    <CustomPredictStack.Navigator>
+      <CustomPredictStack.Screen name="Custom Predict" component={CustomPredict} />
+      <CustomPredictStack.Screen name="DetailReport" component={DetailReport} />
+    </CustomPredictStack.Navigator>
+  );
+}
 
 const MainScreen = () => {
   return (
@@ -91,8 +124,8 @@ const MainScreen = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
+        activeTintColor: "red",
+        inactiveTintColor: "black",
       }}
     >
       <Tab.Screen name="Map" component={MapStackScreen} />

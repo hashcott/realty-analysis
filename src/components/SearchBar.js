@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { Feather } from "@expo/vector-icons";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   return (
-    <View style={styles.searchBar}>
+    <View style={{ ...styles.searchBar, ...props.styling }}>
       <Feather
         style={{ padding: 12, paddingRight: 0 }}
         name="search"
@@ -17,7 +17,16 @@ const SearchBar = () => {
         minLength={2}
         autoFocus={false}
         returnKeyType={"default"}
+        listViewDisplayed={false}
         fetchDetails={true}
+        onPress={(data, details = null) => props.handleSearch(details)}
+        query={{
+          key: "AIzaSyAhuvkbu8iQU3vptKQSbaHQNlTJv0ndTVw",
+          language: "vn", // language of the results
+          // types: '(cities)', // default: 'geocode'
+        }}
+        currentLocation={true}
+        currentLocationLabel="Current location"
         styles={{
           textInputContainer: {
             backgroundColor: "rgba(0,0,0,0)",
@@ -43,12 +52,6 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
   searchBar: {
     flexDirection: "row",
-    position: "absolute",
-    left: 20,
-    top: 20,
-    right: 80,
-    height: 50,
-    zIndex: 1,
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { StyleSheet, Text, View,TouchableOpacity, Dimensions } from "react-native";
 import {
   VictoryArea,
@@ -6,10 +6,21 @@ import {
 } from "victory-native";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
 
 const ItemReport = ({ item, HandleClick }) => {
+  const [reportData, setReportData] = useState([{"date": 1, "price": 5.0200133}, {"date": 4, "price": 5.0200133}, {"date": 6, "price": 5.0200133}, {"date": 9, "price": 5.0200133}, {"date": 12, "price": 5.0200133}]);
+
+  useEffect(() => {
+    const temp1 = item.reportData.replaceAll("'", '"');
+    const temp =  JSON.parse(temp1);
+    setReportData(temp);
+    console.log(reportData)
+  }, [])
+
+  
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={() => {
         HandleClick(item)
@@ -23,16 +34,18 @@ const ItemReport = ({ item, HandleClick }) => {
       >
         <MaterialCommunityIcons name="home-city-outline" size={30} color={item.color} style={{marginLeft: 20}} />
         <Text style={styles.title}>
-          {item.x}
+          {item.loai}
         </Text>
-        {item.predict === "decrease" && 
+        {item.trend === "không đổi" &&
+        <FontAwesome name="minus" size={40} color="orange" style={{ marginRight: 20 }}/>}
+        {item.trend === "giảm" && 
         <Entypo
           name="arrow-down"
           size={40}
           color="red"
           style={{ marginRight: 20 }}
         />}
-        {item.predict === "increase" && 
+        {item.trend === "tăng" && 
         <Entypo name="arrow-up" size={40} color="green" style={{ marginRight: 20 }} />}
       </View>
 
@@ -52,8 +65,8 @@ const ItemReport = ({ item, HandleClick }) => {
             strokeLinecap: "round",
           },
         }}
-        data={item.reportData}
-        x="month"
+        data={reportData}
+        x="date"
         y="price"
       />
     </TouchableOpacity >
