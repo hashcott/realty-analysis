@@ -1,31 +1,22 @@
-# Realty Analysis App
+# Estalysis App
 
-## Getting Started
+## [Landing Page](https://tranghoang200.github.io/automatic-app-landing-page/)
 
-1. Ensure you've followed the [React Native - Get Started Guide](https://facebook.github.io/react-native/docs/getting-started.html)
-1. Clone this project `git clone https://github.com/2ksoft/boilerplate-rn-coderschool.git`
-1. Run `npm install` from root directory
-1. Start the app in [IOS](https://docs.expo.io/workflow/ios-simulator/) - [Android](https://docs.expo.io/workflow/android-studio-emulator/)
+## Demo  
 
-## Stack
+![](demo.gif)
 
-- [React Native](https://facebook.github.io/react-native/) for building mobile apps using Javascript
-- [Redux](https://github.com/reduxjs/redux) a predictable state container for Javascript apps
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk) middleware for Redux
-- [Babel](http://babeljs.io/) for ES6+ support
-- [React Navigation](https://github.com/react-community/react-navigation) navigation for React Native
+## Feature List
 
-## File Structure
-
-- `/src` - Contains our React Native App codebase
-  - `/actions` - Action Types and Action Creators
-  - `/assets` - Images, Fonts and others
-  - `/components` - Dumb components
-    - `/common` - Shared components
-  - `/config` - Config files
-  - `/containers` - Smart components
-  - `/reducers` - Reducers
-  - `/utils` - Helpers
-  - `/App.js` - Base component
-  - `/Router.js` - App navigation
-  - `/Store.js` - Store
+- Search House And Properties
+  - Using google API and the crawled data from some biggest real estate website in Vietnam.
+- User friendly Mobile App
+  - Everything you need to know about real estate is in your phone.
+- Graph Support Prediction
+  - Prediction with high tendency, and easy visual with graph.
+- Predict According To Hourse Type
+  - Type in the address you want, the app will predict all type of house in that area.
+- Predict Specific House
+  - Input the infomation of the house you want, the app will predict all the house that have similar attribute.
+- Automatic Update Data Each Day
+  - You will be up to date immediately each day, convenience for precise analysis for real estate companies.
